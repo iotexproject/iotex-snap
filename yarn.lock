@@ -20598,7 +20598,7 @@ __metadata:
     react-is: ^18.2.0
     rimraf: ^3.0.2
     styled-components: 5.3.3
-    typescript: ^5.3.3
+    typescript: 5.0
   languageName: unknown
   linkType: soft
 
