@@ -1,10 +1,10 @@
 {
-  "name": "snap",
+  "name": "iotex-snap",
   "version": "0.1.0",
   "description": "A snap that understands io addresses, supports INS domains and is friedly with DePIN assets",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MetaMask/template-snap-monorepo.git"
+    "url": "https://github.com/machinefi/iotex-snap.git"
   },
   "license": "(MIT-0 OR Apache-2.0)",
   "main": "./dist/bundle.js",
