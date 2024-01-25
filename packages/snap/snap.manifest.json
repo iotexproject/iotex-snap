@@ -1,13 +1,13 @@
 {
   "version": "0.1.0",
-  "description": "An example Snap written in TypeScript.",
-  "proposedName": "TypeScript Example",
+  "description": "A snap that understands io addresses, supports INS domains and is friedly with DePIN assets.",
+  "proposedName": "IoTeX Snap",
   "repository": {
     "type": "git",
     "url": "https://github.com/MetaMask/template-snap-monorepo.git"
   },
   "source": {
-    "shasum": "tUOHT7jBse590dsr8VUFuE5aWUNbPa8FfAomcvh8fYM=",
+    "shasum": "VJpB5MKcKWKGT520IqRIquhkru3ira2s5dObM3MFXnY=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
