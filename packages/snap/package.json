@@ -1,7 +1,7 @@
 {
   "name": "snap",
   "version": "0.1.0",
-  "description": "The 'Hello, world!' of MetaMask Snaps, now written in TypeScript.",
+  "description": "A snap that understands io addresses, supports INS domains and is friedly with DePIN assets",
   "repository": {
     "type": "git",
     "url": "https://github.com/MetaMask/template-snap-monorepo.git"
