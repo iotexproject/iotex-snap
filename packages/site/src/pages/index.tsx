@@ -5,7 +5,7 @@ import {
   ConnectButton,
   InstallFlaskButton,
   ReconnectButton,
-  SendHelloButton,
+  ConvertButton,
   Card,
 } from '../components';
 import { defaultSnapOrigin } from '../config';
@@ -14,7 +14,7 @@ import {
   connectSnap,
   getSnap,
   isLocalSnap,
-  sendHello,
+  convertAddress,
   shouldDisplayReconnectButton,
 } from '../utils';
 
@@ -124,9 +124,9 @@ const Index = () => {
     }
   };
 
-  const handleSendHelloClick = async () => {
+  const handleConvertClick = async () => {
     try {
-      await sendHello();
+      await convertAddress();
     } catch (error) {
       console.error(error);
       dispatch({ type: MetamaskActions.SetError, payload: error });
@@ -136,10 +136,10 @@ const Index = () => {
   return (
     <Container>
       <Heading>
-        Welcome to <Span>template-snap</Span>
+        Welcome to <Span>IoTeX Snap</Span>
       </Heading>
       <Subtitle>
-        Get started by editing <code>src/index.ts</code>
+        Get IoTeX snap and improve your DePIN experience with MetaMask.
       </Subtitle>
       <CardContainer>
         {state.error && (
@@ -163,7 +163,7 @@ const Index = () => {
             content={{
               title: 'Connect',
               description:
-                'Get started by connecting to and installing the example snap.',
+                'Get started by connecting to and installing the IoTeX snap.',
               button: (
                 <ConnectButton
                   onClick={handleConnectClick}
@@ -192,12 +192,12 @@ const Index = () => {
         )}
         <Card
           content={{
-            title: 'Send Hello message',
+            title: 'Show io address',
             description:
-              'Display a custom message within a confirmation screen in MetaMask.',
+              'Display a io version of your address to easily share it with others.',
             button: (
-              <SendHelloButton
-                onClick={handleSendHelloClick}
+              <ConvertButton
+                onClick={handleConvertClick}
                 disabled={!state.installedSnap}
               />
             ),

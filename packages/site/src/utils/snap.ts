@@ -54,14 +54,46 @@ export const getSnap = async (version?: string): Promise<Snap | undefined> => {
 };
 
 /**
- * Invoke the "hello" method from the example snap.
+ * Invoke the "convert" method from the example snap.
  */
 
-export const sendHello = async () => {
+export const convertAddress = async () => {
+  const account = await connectWallet();
+
+  if (!account) {
+    console.log('No account found');
+    return;
+  }
+
   await window.ethereum.request({
     method: 'wallet_invokeSnap',
-    params: { snapId: defaultSnapOrigin, request: { method: 'hello' } },
+    params: {
+      snapId: defaultSnapOrigin,
+      request: {
+        method: 'convert',
+        params: { address: account },
+      },
+    },
   });
 };
 
 export const isLocalSnap = (snapId: string) => snapId.startsWith('local:');
+
+/**
+ * Connect the user's MetaMask wallet.
+ * @returns The account address.
+ */
+async function connectWallet() {
+  const accounts = await window.ethereum
+    .request({ method: 'eth_requestAccounts' })
+    .catch((ethErr) => {
+      if (ethErr.code === 4001) {
+        // EIP-1193 userRejectedRequest error
+        // If this happens, the user rejected the connection request.
+        console.log('Please connect to MetaMask.');
+      } else {
+        console.error(ethErr);
+      }
+    });
+  return (accounts as string[])?.[0];
+}
