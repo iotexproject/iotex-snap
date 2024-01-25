@@ -1,18 +1,18 @@
 {
   "version": "0.1.0",
   "description": "A snap that understands io addresses, supports INS domains and is friedly with DePIN assets.",
-  "proposedName": "IoTeX Snap",
+  "proposedName": "IoTeX",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MetaMask/template-snap-monorepo.git"
+    "url": "https://github.com/machinefi/iotex-snap.git"
   },
   "source": {
     "shasum": "VJpB5MKcKWKGT520IqRIquhkru3ira2s5dObM3MFXnY=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
-        "iconPath": "images/icon.svg",
-        "packageName": "snap",
+        "iconPath": "images/iotex-logo.svg",
+        "packageName": "iotex-snap",
         "registry": "https://registry.npmjs.org/"
       }
     }
