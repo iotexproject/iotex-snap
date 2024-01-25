@@ -1,35 +1,45 @@
 import type { OnRpcRequestHandler } from '@metamask/snaps-sdk';
-import { panel, text } from '@metamask/snaps-sdk';
+import { panel, text, copyable, divider } from '@metamask/snaps-sdk';
+
+import { convert0xToIoAddress } from '../utils/convert';
 
 /**
  * Handle incoming JSON-RPC requests, sent through `wallet_invokeSnap`.
  *
  * @param args - The request handler args as object.
- * @param args.origin - The origin of the request, e.g., the website that
- * invoked the snap.
  * @param args.request - A validated JSON-RPC request object.
  * @returns The result of `snap_dialog`.
  * @throws If the request method is not valid for this snap.
  */
-export const onRpcRequest: OnRpcRequestHandler = async ({
-  origin,
-  request,
-}) => {
+export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
   switch (request.method) {
-    case 'hello':
+    case 'convert': {
+      if (!request.params?.address) {
+        throw new Error('Invalid params.');
+      }
+
+      const addressToConvert = request.params.address as string;
+
+      const res = convert0xToIoAddress(addressToConvert);
+
+      if (!res) {
+        throw new Error('Failed to convert address.');
+      }
+
       return snap.request({
         method: 'snap_dialog',
         params: {
-          type: 'confirmation',
+          type: 'alert',
           content: panel([
-            text(`Hello, **${origin}**!`),
-            text('This custom confirmation is just for display purposes.'),
-            text(
-              'But you can edit the snap source code to make it do something, if you want to!',
-            ),
+            text('Your connect account is:'),
+            copyable(addressToConvert),
+            divider(),
+            text('The io representation of the address is:'),
+            copyable(res.resolvedAddress),
           ]),
         },
       });
+    }
     default:
       throw new Error('Method not found.');
   }
