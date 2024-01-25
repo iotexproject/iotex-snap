@@ -1,6 +1,6 @@
-import { from } from '@iotexproject/iotex-address-ts';
 import type { OnNameLookupHandler } from '@metamask/snaps-sdk';
 
+import { convertIoToOxAddress } from '../utils/convert';
 import { getDomainQuery, INS_SUBGRAPH } from './queryINS';
 
 const IOTEX_MAINNET_CHAIN_ID = 'eip155:4689';
@@ -74,20 +74,4 @@ async function getIoAddressOwner(domain: string) {
   const resolvedAddress = data?.domains?.[0]?.resolvedAddress?.id;
 
   return resolvedAddress ? { resolvedAddress } : null;
-}
-
-/**
- * Convert an IoTeX address to an Ethereum address.
- * @param address - The address to resolve.
- * @returns If successful, an object containing the resolvedAddress. Null otherwise.
- */
-function convertIoToOxAddress(
-  address: string,
-): { resolvedAddress: string } | null {
-  try {
-    const resolvedAddress = from(address).stringEth();
-    return resolvedAddress ? { resolvedAddress } : null;
-  } catch (e) {
-    return null;
-  }
 }
