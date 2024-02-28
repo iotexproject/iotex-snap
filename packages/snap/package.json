@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@iotexproject/iotex-address-ts": "^1.0.4",
-    "@metamask/snaps-sdk": "^1.2.0",
+    "@metamask/snaps-sdk": "^3.0.1",
     "buffer": "^6.0.3"
   },
   "devDependencies": {
