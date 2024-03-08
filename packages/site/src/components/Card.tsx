@@ -9,11 +9,15 @@ type CardProps = {
   };
   disabled?: boolean;
   fullWidth?: boolean;
+  maxHeight?: string;
+  hasBorder?: boolean;
 };
 
 const CardWrapper = styled.div<{
   fullWidth?: boolean | undefined;
   disabled?: boolean | undefined;
+  maxHeight?: string | undefined;
+  hasBorder?: boolean | undefined;
 }>`
   display: flex;
   flex-direction: column;
@@ -22,17 +26,20 @@ const CardWrapper = styled.div<{
   margin-top: 2.4rem;
   margin-bottom: 2.4rem;
   padding: 2.4rem;
-  border: 1px solid ${({ theme }) => theme.colors.border?.default};
+  border: solid ${({ theme }) => theme.colors.border?.default};
+  border-width: ${({ hasBorder }) => (hasBorder ? '1px' : '0px')};
   border-radius: ${({ theme }) => theme.radii.default};
   box-shadow: ${({ theme }) => theme.shadows.default};
   filter: opacity(${({ disabled }) => (disabled ? '.4' : '1')});
   align-self: stretch;
+  max-height: ${({ maxHeight }) => maxHeight};
   ${({ theme }) => theme.mediaQueries.small} {
     width: 100%;
     margin-top: 1.2rem;
     margin-bottom: 1.2rem;
     padding: 1.6rem;
-  }
+  };
+  overflow: hidden;
 `;
 
 const Title = styled.h2`
@@ -48,10 +55,10 @@ const Description = styled.div`
   margin-bottom: 2.4rem;
 `;
 
-export const Card = ({ content, disabled = false, fullWidth }: CardProps) => {
+export const Card = ({ content, disabled = false, fullWidth, maxHeight, hasBorder}: CardProps) => {
   const { title, description, button } = content;
   return (
-    <CardWrapper fullWidth={fullWidth} disabled={disabled}>
+    <CardWrapper fullWidth={fullWidth} disabled={disabled} maxHeight={maxHeight} hasBorder={hasBorder??true}>
       {title && <Title>{title}</Title>}
       <Description>{description}</Description>
       {button}

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { Footer, Header } from './components';
 import { GlobalStyle } from './config/theme';
 import { ToggleThemeContext } from './Root';
+import './styles/global.css';
 
 const Wrapper = styled.div`
   display: flex;

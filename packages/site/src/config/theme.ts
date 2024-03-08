@@ -42,7 +42,7 @@ const theme = {
 export const light: DefaultTheme = {
   colors: {
     background: {
-      default: '#FFFFFF',
+      default: 'rgb(247, 247, 249)',
       alternative: '#F2F4F6',
       inverse: '#141618',
     },
@@ -51,7 +51,7 @@ export const light: DefaultTheme = {
       alternative: '#BBC0C5',
     },
     text: {
-      default: '#24272A',
+      default: 'rgb(15, 23, 42)',
       muted: '#6A737D',
       alternative: '#535A61',
       inverse: '#FFFFFF',
@@ -60,7 +60,7 @@ export const light: DefaultTheme = {
       default: '#BBC0C5',
     },
     primary: {
-      default: '#6F4CFF',
+      default: '#775fce',
       inverse: '#FFFFFF',
     },
     card: {
@@ -99,7 +99,7 @@ export const dark: DefaultTheme = {
       default: '#848C96',
     },
     primary: {
-      default: '#6F4CFF',
+      default: '#775fce',
       inverse: '#FFFFFF',
     },
     card: {
@@ -132,6 +132,7 @@ export const GlobalStyle = createGlobalStyle`
     font-family: ${(props) => props.theme.fonts.default};
     font-size: ${(props) => props.theme.fontSizes.text};
     margin: 0;
+    line-height: 22px;
   }
 
   * {
