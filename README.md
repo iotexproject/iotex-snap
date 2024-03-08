@@ -51,3 +51,6 @@ script in the `lavamoat.allowScripts` section of `package.json`.
 
 See the documentation for [@lavamoat/allow-scripts](https://github.com/LavaMoat/LavaMoat/tree/main/packages/allow-scripts)
 for more information.
+
+### UI Development
+Now the UI about depinscan snap is in branch 'depin_snap'
