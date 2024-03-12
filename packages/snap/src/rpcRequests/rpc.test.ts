@@ -4,19 +4,21 @@ import { panel, text, copyable, divider } from '@metamask/snaps-sdk';
 
 describe('onRpcRequest', () => {
   it('throws an error if the requested method does not exist', async () => {
-    const { request, close } = await installSnap();
+    const { request } = await installSnap();
 
     const response = await request({
       method: 'foo',
     });
 
     expect(response).toRespondWithError({
-      code: -32603,
-      message: 'Method not found.',
+      code: -32601,
+      message: 'The method does not exist / is not available.',
       stack: expect.any(String),
+      data: {
+        method: 'foo',
+        cause: null,
+      },
     });
-
-    await close();
   });
 
   describe('web3-to-io', () => {
@@ -48,7 +50,7 @@ describe('onRpcRequest', () => {
 
       await ui.ok();
 
-      await response;
+      expect(await response).toRespondWith(null);
     });
   });
 });

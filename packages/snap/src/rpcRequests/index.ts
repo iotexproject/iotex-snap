@@ -1,5 +1,12 @@
+import { rpcErrors } from '@metamask/rpc-errors';
 import type { OnRpcRequestHandler } from '@metamask/snaps-sdk';
-import { panel, text, copyable, divider } from '@metamask/snaps-sdk';
+import {
+  panel,
+  text,
+  copyable,
+  divider,
+  DialogType,
+} from '@metamask/snaps-sdk';
 
 import { convert0xToIoAddress } from '../utils/convert';
 
@@ -14,33 +21,47 @@ import { convert0xToIoAddress } from '../utils/convert';
 export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
   switch (request.method) {
     case 'convert': {
-      if (!request.params?.address) {
-        throw new Error('Invalid params.');
+      try {
+        const params = request?.params as { address: string } | undefined;
+        if (!params?.address) {
+          throw new Error('Invalid params.');
+        }
+
+        const addressToConvert = params.address;
+
+        const res = convert0xToIoAddress(addressToConvert);
+        console.log('converting: ', res);
+
+        if (!res) {
+          throw new Error('Failed to convert address.');
+        }
+
+        return snap.request({
+          method: 'snap_dialog',
+          params: {
+            type: DialogType.Alert,
+            content: panel([
+              text('Your connect account is:'),
+              copyable(addressToConvert),
+              divider(),
+              text('The io representation of the address is:'),
+              copyable(res.resolvedAddress),
+            ]),
+          },
+        });
+      } catch (error: any) {
+        throw rpcErrors.internal({
+          data: {
+            message: error.message,
+          },
+        });
       }
-
-      const addressToConvert = request.params.address as string;
-
-      const res = convert0xToIoAddress(addressToConvert);
-
-      if (!res) {
-        throw new Error('Failed to convert address.');
-      }
-
-      return snap.request({
-        method: 'snap_dialog',
-        params: {
-          type: 'alert',
-          content: panel([
-            text('Your connect account is:'),
-            copyable(addressToConvert),
-            divider(),
-            text('The io representation of the address is:'),
-            copyable(res.resolvedAddress),
-          ]),
-        },
-      });
     }
     default:
-      throw new Error('Method not found.');
+      throw rpcErrors.methodNotFound({
+        data: {
+          method: request.method,
+        },
+      });
   }
 };
