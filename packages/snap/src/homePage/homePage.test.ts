@@ -5,7 +5,11 @@ import { onHomePage } from '.';
 describe('onHomePage', () => {
   it('shows a panel', async () => {
     expect(await onHomePage()).toRender(
-      panel([heading('Hello world!'), text('Welcome to my Snap home page!')]),
+      panel([
+        heading('IoTeX snap'),
+        heading('Following features are supported:'),
+        text('Address conversion from 0x to io address'),
+      ]),
     );
   });
 });

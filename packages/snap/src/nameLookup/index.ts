@@ -1,4 +1,7 @@
-import type { OnNameLookupHandler } from '@metamask/snaps-sdk';
+import type {
+  DomainLookupResult,
+  OnNameLookupHandler,
+} from '@metamask/snaps-sdk';
 
 import { convertIoToOxAddress } from '../utils/convert';
 import { getDomainQuery, INS_SUBGRAPH } from './queryINS';
@@ -28,7 +31,7 @@ export const onNameLookup: OnNameLookupHandler = async (request) => {
 
   if (domain) {
     if (domain.endsWith('.io') && chainId === IOTEX_MAINNET_CHAIN_ID) {
-      return await getIoAddressOwner(domain);
+      return await getInsDomainOwner(domain);
     }
 
     if (domain.startsWith('io')) {
@@ -44,7 +47,9 @@ export const onNameLookup: OnNameLookupHandler = async (request) => {
  * @param domain - The domain to resolve.
  * @returns If successful, an object containing the resolvedAddress. Null otherwise.
  */
-async function getIoAddressOwner(domain: string) {
+async function getInsDomainOwner(
+  domain: string,
+): Promise<DomainLookupResult | null> {
   type Data = {
     data: {
       domains: Domain[];
@@ -73,5 +78,14 @@ async function getIoAddressOwner(domain: string) {
 
   const resolvedAddress = data?.domains?.[0]?.resolvedAddress?.id;
 
-  return resolvedAddress ? { resolvedAddress } : null;
+  return resolvedAddress
+    ? {
+        resolvedAddresses: [
+          {
+            protocol: 'ins',
+            resolvedAddress,
+          },
+        ],
+      }
+    : null;
 }

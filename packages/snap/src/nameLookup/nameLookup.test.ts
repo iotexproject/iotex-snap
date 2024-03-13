@@ -40,7 +40,12 @@ describe('onNameLookup', () => {
       } as any);
 
       expect(await onNameLookup(request)).toStrictEqual({
-        resolvedAddress: ADDRESS_MOCK,
+        resolvedAddresses: [
+          {
+            protocol: 'ins',
+            resolvedAddress: ADDRESS_MOCK,
+          },
+        ],
       });
     });
     it('returns null if invalid domain', async () => {
@@ -68,7 +73,12 @@ describe('onNameLookup', () => {
       };
 
       expect(await onNameLookup(request)).toStrictEqual({
-        resolvedAddress: OX_ADDRESS_MOCK,
+        resolvedAddresses: [
+          {
+            protocol: 'io to 0x',
+            resolvedAddress: OX_ADDRESS_MOCK,
+          },
+        ],
       });
     });
     it('returns null if invalid io address', async () => {
