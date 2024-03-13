@@ -30,7 +30,6 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
         const addressToConvert = params.address;
 
         const res = convert0xToIoAddress(addressToConvert);
-        console.log('converting: ', res);
 
         if (!res) {
           throw new Error('Failed to convert address.');
