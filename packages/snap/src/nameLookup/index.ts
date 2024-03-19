@@ -31,7 +31,7 @@ export const onNameLookup: OnNameLookupHandler = async (request) => {
 
   if (domain) {
     if (domain.endsWith('.io') && chainId === IOTEX_MAINNET_CHAIN_ID) {
-      return await getInsDomainOwner(domain);
+      return getInsDomainOwner(domain);
     }
 
     if (domain.startsWith('io')) {

@@ -1,5 +1,6 @@
 import { from, fromBytes } from '@iotexproject/iotex-address-ts';
 import { type DomainLookupResult } from '@metamask/snaps-sdk';
+import { bech32 } from 'bech32';
 
 /**
  * Convert an IoTeX address to an Ethereum address.
@@ -9,14 +10,23 @@ import { type DomainLookupResult } from '@metamask/snaps-sdk';
 export function convertIoToOxAddress(
   address: string,
 ): DomainLookupResult | null {
+  if (!address.startsWith('io')) {
+    throw Error('Invalid io address');
+  }
+
   try {
-    const resolvedAddress = from(address).stringEth();
+    const { prefix, words } = bech32.decode(address);
+    if (prefix !== 'io') {
+      throw new Error(`hrp ${prefix} and address prefix io don't match`);
+    }
+    const resolvedAddress = byteArrayToHexString(bech32.fromWords(words));
+
     return resolvedAddress
       ? {
           resolvedAddresses: [
             {
-              protocol: 'io to 0x',
-              resolvedAddress,
+              protocol: 'ins',
+              resolvedAddress: `0x${resolvedAddress}`,
             },
           ],
         }
@@ -68,4 +78,15 @@ function hexStringToByteArray(hexString: string) {
   }
 
   return byteArray;
+}
+
+/**
+ * Helper function to convert bytes array to hex string.
+ * @param byteArray - Array of bytes.
+ * @returns Hex string.
+ */
+function byteArrayToHexString(byteArray: number[]) {
+  return Array.from(byteArray, (byte) => {
+    return ('0' + (byte & 0xff).toString(16)).slice(-2);
+  }).join('');
 }
