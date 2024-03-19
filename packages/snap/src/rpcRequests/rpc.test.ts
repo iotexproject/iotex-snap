@@ -40,7 +40,7 @@ describe('onRpcRequest', () => {
       expect(ui.type).toBe('alert');
       expect(ui).toRender(
         panel([
-          text('Your connect account is:'),
+          text('Your connected account is:'),
           copyable(OX_ADDRESS_MOCK),
           divider(),
           text('The io representation of the address is:'),

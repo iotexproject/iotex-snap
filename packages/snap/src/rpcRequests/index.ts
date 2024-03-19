@@ -40,7 +40,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
           params: {
             type: DialogType.Alert,
             content: panel([
-              text('Your connect account is:'),
+              text('Your connected account is:'),
               copyable(addressToConvert),
               divider(),
               text('The io representation of the address is:'),
