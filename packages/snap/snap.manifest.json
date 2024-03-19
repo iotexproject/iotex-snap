@@ -7,7 +7,7 @@
     "url": "https://github.com/machinefi/iotex-snap.git"
   },
   "source": {
-    "shasum": "dFXHAbK9C7lAa+XQYgi66jbHJ1/cKRfDLOG716XgRKM=",
+    "shasum": "Lyo5H8KRmmCCQBTWD5rbCW/6eyRrGPt4S0DKcpWB+Ak=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
@@ -30,7 +30,8 @@
       "chains": [
         "eip155:4689"
       ]
-    }
+    },
+    "endowment:ethereum-provider": {}
   },
   "manifestVersion": "0.1"
 }

@@ -2,12 +2,14 @@ import {
   ButtonType,
   button,
   copyable,
+  divider,
   form,
   heading,
   input,
   panel,
   text,
 } from '@metamask/snaps-sdk';
+import { convert0xToIoAddress } from '../utils/convert';
 
 /**
  * Initiate a new interface with the starting screen.
@@ -19,8 +21,12 @@ export async function createInterface(): Promise<string> {
     method: 'snap_createInterface',
     params: {
       ui: panel([
-        heading('Convert Address from 0x to io and vice versa'),
-        button({ value: 'Start', name: 'convert' }),
+        button({ value: '↔️ Convert Address', name: 'convert' }),
+        button({ value: '👀 Show My Addresses', name: 'show' }),
+        divider(),
+        text('[DePINscan](https://depinscan.io)'),
+        text('[IoTeX](https://iotex.io)'),
+        text('[Mine DePIN Liquidity](https://swap.mimo.exchange/pools)'),
       ]),
     },
   });
@@ -79,4 +85,18 @@ export async function showResult(
       ]),
     },
   });
+}
+
+export function buildAddressesDialog(addresses: string[]) {
+  return panel([
+    heading('Your connected addresses'),
+    ...addresses.map((addr, idx) => {
+      return panel([
+        text(`Address ${idx + 1}: `),
+        copyable(addr),
+        text('Converted address: '),
+        copyable(convert0xToIoAddress(addr)?.resolvedAddress),
+      ]);
+    }),
+  ]);
 }

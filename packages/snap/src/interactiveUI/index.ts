@@ -1,7 +1,7 @@
 import type { OnUserInputHandler } from '@metamask/snaps-sdk';
 import { UserInputEventType } from '@metamask/snaps-sdk';
 
-import { showForm, showResult } from './ui';
+import { buildAddressesDialog, showForm, showResult } from './ui';
 import { convert0xToIoAddress, convertIoToOxAddress } from '../utils/convert';
 
 /**
@@ -17,6 +17,22 @@ export const onUserInput: OnUserInputHandler = async ({ id, event }) => {
     switch (event.name) {
       case 'convert':
         await showForm(id);
+        break;
+
+      case 'show':
+        const addresses = await ethereum.request({
+          method: 'eth_requestAccounts',
+        });
+
+        const dialog = buildAddressesDialog((addresses as string[]) ?? []);
+
+        await snap.request({
+          method: 'snap_dialog',
+          params: {
+            type: 'alert',
+            content: dialog,
+          },
+        });
         break;
 
       default:
