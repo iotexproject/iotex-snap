@@ -47,7 +47,7 @@ export const onNameLookup: OnNameLookupHandler = async (request) => {
  * @param domain - The domain to resolve.
  * @returns If successful, an object containing the resolvedAddress. Null otherwise.
  */
-async function getInsDomainOwner(
+export async function getInsDomainOwner(
   domain: string,
 ): Promise<DomainLookupResult | null> {
   type Data = {

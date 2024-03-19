@@ -1,4 +1,4 @@
-import { from, fromBytes } from '@iotexproject/iotex-address-ts';
+import { fromBytes } from '@iotexproject/iotex-address-ts';
 import { type DomainLookupResult } from '@metamask/snaps-sdk';
 import { bech32 } from 'bech32';
 
