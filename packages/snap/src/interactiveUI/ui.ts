@@ -26,6 +26,7 @@ export async function createInterface(): Promise<string> {
         divider(),
         text('[DePINscan](https://depinscan.io)'),
         text('[IoTeX](https://iotex.io)'),
+        text('[Wallet](https://wallet.iotex.io)'),
         text('[Mine DePIN Liquidity](https://swap.mimo.exchange/pools)'),
       ]),
     },
