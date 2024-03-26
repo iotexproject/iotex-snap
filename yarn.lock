@@ -6886,7 +6886,7 @@ invariant@^2.2.3, invariant@^2.2.4:
     loose-envify "^1.0.0"
 
 "iotex-snap@file:/Users/nikitazhou/Documents/work/ix24q1/projects/ws-snaps/packages/snap":
-  version "0.1.0"
+  version "1.0.0"
   resolved "file:packages/snap"
   dependencies:
     "@iotexproject/iotex-address-ts" "^1.0.4"
@@ -10606,10 +10606,10 @@ typescript-tuple@^2.2.1:
   dependencies:
     typescript-compare "^0.0.2"
 
-typescript@^5.3.3, "typescript@>=4.3 <6":
+typescript@^5.3.3, typescript@>=4.2.0, "typescript@>=4.3 <6":
   version "5.4.2"
 
-"typescript@>= 2.7", "typescript@>=2.1.0 || >=2.1.0-dev || >=2.2.0-dev || >=2.3.0-dev || >=2.4.0-dev || >=2.5.0-dev || >=2.6.0-dev || >=2.7.0-dev || >=2.8.0-dev || >=2.9.0-dev || >= 3.0.0-dev || >= 3.1.0-dev", "typescript@>=2.3.0-dev || >=2.4.0-dev || >=2.5.0-dev || >=2.6.0-dev || >=2.7.0-dev || >=2.8.0-dev || >=2.9.0-dev || >=3.0.0-dev || >= 3.1.0-dev || >= 3.2.0-dev || >= 4.0.0-dev", "typescript@>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta", typescript@>=4.2.0, "typescript@~4.8.4 || ~5.0 || ~5.1", typescript@5.0:
+"typescript@>= 2.7", "typescript@>=2.1.0 || >=2.1.0-dev || >=2.2.0-dev || >=2.3.0-dev || >=2.4.0-dev || >=2.5.0-dev || >=2.6.0-dev || >=2.7.0-dev || >=2.8.0-dev || >=2.9.0-dev || >= 3.0.0-dev || >= 3.1.0-dev", "typescript@>=2.3.0-dev || >=2.4.0-dev || >=2.5.0-dev || >=2.6.0-dev || >=2.7.0-dev || >=2.8.0-dev || >=2.9.0-dev || >=3.0.0-dev || >= 3.1.0-dev || >= 3.2.0-dev || >= 4.0.0-dev", "typescript@>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta", "typescript@~4.8.4 || ~5.0 || ~5.1", typescript@5.0:
   version "5.0.4"
 
 ua-parser-js@^1.0.35:
