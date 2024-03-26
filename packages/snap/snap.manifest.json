@@ -1,13 +1,13 @@
 {
-  "version": "0.1.0",
-  "description": "A snap that understands io addresses, supports INS domains and is friedly with DePIN assets.",
+  "version": "1.0.0",
+  "description": "A snap with a simple UI for interacting with the IoTeX blockchain and DePIN assets",
   "proposedName": "IoTeX",
   "repository": {
     "type": "git",
     "url": "https://github.com/machinefi/iotex-snap.git"
   },
   "source": {
-    "shasum": "Lyo5H8KRmmCCQBTWD5rbCW/6eyRrGPt4S0DKcpWB+Ak=",
+    "shasum": "TqvmqGf5lAW/tJgQtqPDIlyJnFufVqmNg3CPC4cr9oU=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
