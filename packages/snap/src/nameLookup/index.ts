@@ -31,7 +31,7 @@ export const onNameLookup: OnNameLookupHandler = async (request) => {
 
   if (domain) {
     if (domain.endsWith('.io') && chainId === IOTEX_MAINNET_CHAIN_ID) {
-      return await getInsDomainOwner(domain);
+      return getInsDomainOwner(domain);
     }
 
     if (domain.startsWith('io')) {
@@ -47,7 +47,7 @@ export const onNameLookup: OnNameLookupHandler = async (request) => {
  * @param domain - The domain to resolve.
  * @returns If successful, an object containing the resolvedAddress. Null otherwise.
  */
-async function getInsDomainOwner(
+export async function getInsDomainOwner(
   domain: string,
 ): Promise<DomainLookupResult | null> {
   type Data = {

@@ -75,7 +75,7 @@ describe('onNameLookup', () => {
       expect(await onNameLookup(request)).toStrictEqual({
         resolvedAddresses: [
           {
-            protocol: 'io to 0x',
+            protocol: 'ins',
             resolvedAddress: OX_ADDRESS_MOCK,
           },
         ],

@@ -1,14 +1,18 @@
-import { panel, text, heading } from '@metamask/snaps-sdk';
+import { expect } from '@jest/globals';
+import { panel, heading, button } from '@metamask/snaps-sdk';
 
-import { onHomePage } from '.';
+import { installSnap } from '@metamask/snaps-jest';
 
 describe('onHomePage', () => {
-  it('shows a panel', async () => {
-    expect(await onHomePage()).toRender(
+  it('returns custom UI', async () => {
+    const { onHomePage } = await installSnap();
+
+    const response = await onHomePage();
+
+    expect(response).toRender(
       panel([
-        heading('IoTeX snap'),
-        heading('Following features are supported:'),
-        text('Address conversion from 0x to io address'),
+        heading('Convert Address from 0x to io and vice versa'),
+        button({ value: 'Start', name: 'convert' }),
       ]),
     );
   });
