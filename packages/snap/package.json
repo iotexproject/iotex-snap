@@ -1,6 +1,6 @@
 {
   "name": "iotex-snap",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A snap that understands io addresses, supports INS domains and is friedly with DePIN assets",
   "repository": {
     "type": "git",
