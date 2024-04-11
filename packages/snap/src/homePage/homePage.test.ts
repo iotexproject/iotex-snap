@@ -1,5 +1,5 @@
 import { expect } from '@jest/globals';
-import { panel, heading, button } from '@metamask/snaps-sdk';
+import { panel, divider, text, button } from '@metamask/snaps-sdk';
 
 import { installSnap } from '@metamask/snaps-jest';
 
@@ -11,8 +11,13 @@ describe('onHomePage', () => {
 
     expect(response).toRender(
       panel([
-        heading('Convert Address from 0x to io and vice versa'),
-        button({ value: 'Start', name: 'convert' }),
+        button({ value: '↔️ Convert Address', name: 'convert' }),
+        button({ value: '👀 Show My Addresses', name: 'show' }),
+        divider(),
+        text('[DePINscan](https://depinscan.io)'),
+        text('[IoTeX](https://iotex.io)'),
+        text('[Wallet](https://wallet.iotex.io)'),
+        text('[Mine DePIN Liquidity](https://swap.mimo.exchange/pools)'),
       ]),
     );
   });
