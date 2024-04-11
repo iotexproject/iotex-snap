@@ -7,6 +7,7 @@ import {
   heading,
   input,
   panel,
+  spinner,
   text,
 } from '@metamask/snaps-sdk';
 import { convert0xToIoAddress } from '../utils/convert';
@@ -20,17 +21,26 @@ export async function createInterface(): Promise<string> {
   return await snap.request({
     method: 'snap_createInterface',
     params: {
-      ui: panel([
-        button({ value: '↔️ Convert Address', name: 'convert' }),
-        button({ value: '👀 Show My Addresses', name: 'show' }),
-        divider(),
-        text('[DePINscan](https://depinscan.io)'),
-        text('[IoTeX](https://iotex.io)'),
-        text('[Wallet](https://wallet.iotex.io)'),
-        text('[Mine DePIN Liquidity](https://swap.mimo.exchange/pools)'),
-      ]),
+      ui: homePanel(),
     },
   });
+}
+
+/**
+ * A panel for home page
+ *
+ * @returns the panel with main menu
+ */
+export function homePanel() {
+  return panel([
+    button({ value: '↔️ Convert Address', name: 'convert-address' }),
+    button({ value: '👀 Show My Addresses', name: 'show-my-addresses' }),
+    divider(),
+    text('[DePINscan](https://depinscan.io)'),
+    text('[IoTeX](https://iotex.io)'),
+    text('[Wallet](https://wallet.iotex.io)'),
+    text('[Mine DePIN Liquidity](https://swap.mimo.exchange/pools)'),
+  ]);
 }
 
 /**
@@ -39,7 +49,7 @@ export async function createInterface(): Promise<string> {
  * @param id - The Snap interface ID to update.
  * @param ioTo0x - Whether the form is for converting IoTeX to Ethereum or vice versa.
  */
-export async function showForm(id: string) {
+export async function showConvertForm(id: string) {
   await snap.request({
     method: 'snap_updateInterface',
     params: {
@@ -54,9 +64,58 @@ export async function showForm(id: string) {
               placeholder: 'io/0x...',
             }),
             button('Submit', ButtonType.Submit, 'submit'),
+            button('Go back', ButtonType.Button, 'go-back'),
           ],
         }),
       ]),
+    },
+  });
+}
+
+/**
+ * Asks user to connect addresses and then shows io/0x representation of them
+ *
+ * @param id id of the interface to update
+ */
+export async function showMyConvertedAddresses(id: string) {
+  await snap.request({
+    method: 'snap_updateInterface',
+    params: {
+      id,
+      ui: panel([
+        text('A separate Metamask window has been opened.'),
+        text('Select addresses there and then return to this window'),
+        spinner(),
+      ]),
+    },
+  });
+
+  const addresses = await ethereum.request({
+    method: 'eth_requestAccounts',
+  });
+
+  const dialog = buildAddressesDialog((addresses as string[]) ?? []);
+
+  await snap.request({
+    method: 'snap_updateInterface',
+    params: {
+      id,
+      ui: dialog,
+    },
+  });
+}
+
+/**
+ * For go back button
+ *
+ * @param id id of the interface to update
+ */
+export async function updateInterfaceToHomePage(id: string) {
+  await snap.request({
+    method: 'snap_updateInterface',
+    params: {
+      id,
+      ui: homePanel(),
     },
   });
 }
@@ -68,7 +127,7 @@ export async function showForm(id: string) {
  * @param originalAddr - The original address to convert.
  * @param convertedAddr - The converted address.
  */
-export async function showResult(
+export async function showAddrConvertResult(
   id: string,
   originalAddr: string,
   convertedAddr: string,
@@ -88,7 +147,7 @@ export async function showResult(
   });
 }
 
-export function buildAddressesDialog(addresses: string[]) {
+function buildAddressesDialog(addresses: string[]) {
   return panel([
     heading('Your connected addresses'),
     ...addresses.map((addr, idx) => {
