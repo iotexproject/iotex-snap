@@ -1,7 +1,12 @@
 import type { OnUserInputHandler } from '@metamask/snaps-sdk';
 import { UserInputEventType } from '@metamask/snaps-sdk';
 
-import { buildAddressesDialog, showForm, showResult } from './ui';
+import {
+  showConvertForm,
+  showMyConvertedAddresses,
+  showAddrConvertResult,
+  updateInterfaceToHomePage,
+} from './ui';
 import { convert0xToIoAddress, convertIoToOxAddress } from '../utils/convert';
 
 /**
@@ -15,24 +20,16 @@ import { convert0xToIoAddress, convertIoToOxAddress } from '../utils/convert';
 export const onUserInput: OnUserInputHandler = async ({ id, event }) => {
   if (event.type === UserInputEventType.ButtonClickEvent) {
     switch (event.name) {
-      case 'convert':
-        await showForm(id);
+      case 'convert-address':
+        await showConvertForm(id);
         break;
 
-      case 'show':
-        const addresses = await ethereum.request({
-          method: 'eth_requestAccounts',
-        });
+      case 'show-my-addresses':
+        await showMyConvertedAddresses(id);
+        break;
 
-        const dialog = buildAddressesDialog((addresses as string[]) ?? []);
-
-        await snap.request({
-          method: 'snap_dialog',
-          params: {
-            type: 'alert',
-            content: dialog,
-          },
-        });
+      case 'go-back':
+        await updateInterfaceToHomePage(id);
         break;
 
       default:
@@ -45,14 +42,26 @@ export const onUserInput: OnUserInputHandler = async ({ id, event }) => {
     event.name === 'address-form'
   ) {
     const address = event.value['address-input'];
-
-    if (!address) {
-      await showResult(id, '', 'Invalid address');
-      return;
-    }
-
-    convertAddress(id, address);
+    processSubmitedAddress(id, address);
   }
+};
+
+/**
+ *
+ * @param id - The Snap interface ID where the event was fired.
+ * @param address - user's address from input to convert
+ * @returns Returns if invalid input, otherwise shows result
+ */
+const processSubmitedAddress = async (
+  id: string,
+  address: string | undefined,
+) => {
+  if (!address) {
+    await showAddrConvertResult(id, '', 'Invalid address');
+    return;
+  }
+
+  convertAddress(id, address);
 };
 
 /**
@@ -76,5 +85,9 @@ const convertAddress = async (id: string, address: string) => {
     }
   }
 
-  await showResult(id, address, convertedAddress || 'Invalid address');
+  await showAddrConvertResult(
+    id,
+    address,
+    convertedAddress || 'Invalid address',
+  );
 };

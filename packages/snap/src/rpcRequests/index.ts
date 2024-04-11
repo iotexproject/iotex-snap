@@ -1,5 +1,5 @@
 import { rpcErrors } from '@metamask/rpc-errors';
-import type { OnRpcRequestHandler } from '@metamask/snaps-sdk';
+import type { JsonRpcRequest, OnRpcRequestHandler } from '@metamask/snaps-sdk';
 import {
   panel,
   text,
@@ -9,6 +9,7 @@ import {
 } from '@metamask/snaps-sdk';
 
 import { convert0xToIoAddress } from '../utils/convert';
+import { createInterface } from '../interactiveUI/ui';
 
 /**
  * Handle incoming JSON-RPC requests, sent through `wallet_invokeSnap`.
@@ -22,32 +23,18 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
   switch (request.method) {
     case 'convert': {
       try {
-        const params = request?.params as { address: string } | undefined;
-        if (!params?.address) {
-          throw new Error('Invalid params.');
-        }
-
-        const addressToConvert = params.address;
-
-        const res = convert0xToIoAddress(addressToConvert);
-
-        if (!res) {
-          throw new Error('Failed to convert address.');
-        }
-
-        return snap.request({
-          method: 'snap_dialog',
-          params: {
-            type: DialogType.Alert,
-            content: panel([
-              text('Your connected account is:'),
-              copyable(addressToConvert),
-              divider(),
-              text('The io representation of the address is:'),
-              copyable(res.resolvedAddress),
-            ]),
+        return processConvertRpcRequest(request);
+      } catch (error: any) {
+        throw rpcErrors.internal({
+          data: {
+            message: error.message,
           },
         });
+      }
+    }
+    case 'home': {
+      try {
+        return await processHomeRpcRequest();
       } catch (error: any) {
         throw rpcErrors.internal({
           data: {
@@ -64,3 +51,51 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
       });
   }
 };
+
+async function processHomeRpcRequest() {
+  const interfaceId = await createInterface();
+
+  return snap.request({
+    method: 'snap_dialog',
+    params: {
+      type: DialogType.Alert,
+      id: interfaceId,
+    },
+  });
+}
+
+function processConvertRpcRequest(request: JsonRpcRequest) {
+  const params = request?.params as { address: string } | undefined;
+  if (!params?.address) {
+    throw new Error('Invalid params.');
+  }
+
+  const addressToConvert = params.address;
+
+  const res = convert0xToIoAddress(addressToConvert);
+
+  if (!res) {
+    throw new Error('Failed to convert address.');
+  }
+
+  return rpcConnectedAddressPanel(addressToConvert, res);
+}
+
+function rpcConnectedAddressPanel(
+  addressToConvert: string,
+  res: { resolvedAddress: string },
+) {
+  return snap.request({
+    method: 'snap_dialog',
+    params: {
+      type: DialogType.Alert,
+      content: panel([
+        text('Your connected account is:'),
+        copyable(addressToConvert),
+        divider(),
+        text('The io representation of the address is:'),
+        copyable(res.resolvedAddress),
+      ]),
+    },
+  });
+}

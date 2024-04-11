@@ -1,6 +1,6 @@
 import { expect } from '@jest/globals';
 import { installSnap } from '@metamask/snaps-jest';
-import { panel, text, copyable, divider } from '@metamask/snaps-sdk';
+import { panel, text, copyable, divider, button } from '@metamask/snaps-sdk';
 
 describe('onRpcRequest', () => {
   it('throws an error if the requested method does not exist', async () => {
@@ -51,6 +51,30 @@ describe('onRpcRequest', () => {
       await ui.ok();
 
       expect(await response).toRespondWith(null);
+    });
+  });
+
+  describe('home request', () => {
+    it('should open home page on home request', async () => {
+      const { request } = await installSnap();
+
+      const response = request({
+        method: 'home',
+      });
+
+      const ui = await response.getInterface();
+
+      expect(ui).toRender(
+        panel([
+          button({ value: '↔️ Convert Address', name: 'convert' }),
+          button({ value: '👀 Show My Addresses', name: 'show' }),
+          divider(),
+          text('[DePINscan](https://depinscan.io)'),
+          text('[IoTeX](https://iotex.io)'),
+          text('[Wallet](https://wallet.iotex.io)'),
+          text('[Mine DePIN Liquidity](https://swap.mimo.exchange/pools)'),
+        ]),
+      );
     });
   });
 });
