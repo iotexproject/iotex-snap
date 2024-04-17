@@ -29,7 +29,7 @@
   "dependencies": {
     "@iotexproject/iotex-address-ts": "^1.0.4",
     "@metamask/rpc-errors": "^6.2.1",
-    "@metamask/snaps-sdk": "^3.0.1",
+    "@metamask/snaps-sdk": "^4.0.1",
     "bech32": "^2.0.0",
     "buffer": "^6.0.3"
   },
