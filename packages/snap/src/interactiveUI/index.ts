@@ -41,8 +41,11 @@ export const onUserInput: OnUserInputHandler = async ({ id, event }) => {
     event.type === UserInputEventType.FormSubmitEvent &&
     event.name === 'address-form'
   ) {
-    const address = event.value['address-input'];
-    processSubmitedAddress(id, address);
+    const address = event.value['address'];
+
+    if (!address) return;
+
+    processSubmitedAddress(id, address as string);
   }
 };
 
@@ -52,10 +55,7 @@ export const onUserInput: OnUserInputHandler = async ({ id, event }) => {
  * @param address - user's address from input to convert
  * @returns Returns if invalid input, otherwise shows result
  */
-const processSubmitedAddress = async (
-  id: string,
-  address: string | undefined,
-) => {
+const processSubmitedAddress = async (id: string, address: string) => {
   if (!address) {
     await showAddrConvertResult(id, '', 'Invalid address');
     return;
