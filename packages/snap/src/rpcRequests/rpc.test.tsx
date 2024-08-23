@@ -1,6 +1,8 @@
 import { expect } from '@jest/globals';
 import { installSnap } from '@metamask/snaps-jest';
-import { panel, text, copyable, divider, button } from '@metamask/snaps-sdk';
+import { Box, Copyable, Divider, Text } from '@metamask/snaps-sdk/jsx';
+
+import { HomePanel } from '../components/HomePanel';
 
 describe('onRpcRequest', () => {
   it('throws an error if the requested method does not exist', async () => {
@@ -39,13 +41,13 @@ describe('onRpcRequest', () => {
       const ui = await response.getInterface();
       expect(ui.type).toBe('alert');
       expect(ui).toRender(
-        panel([
-          text('Your connected account is:'),
-          copyable(OX_ADDRESS_MOCK),
-          divider(),
-          text('The io representation of the address is:'),
-          copyable(IO_ADDRESS_MOCK),
-        ]),
+        <Box>
+          <Text>Your connected account is:</Text>
+          <Copyable value={OX_ADDRESS_MOCK} />
+          <Divider />
+          <Text>The io representation of the address is:</Text>
+          <Copyable value={IO_ADDRESS_MOCK} />
+        </Box>,
       );
 
       await ui.ok();
@@ -64,17 +66,7 @@ describe('onRpcRequest', () => {
 
       const ui = await response.getInterface();
 
-      expect(ui).toRender(
-        panel([
-          button({ value: '↔️ Convert Address', name: 'convert' }),
-          button({ value: '👀 Show My Addresses', name: 'show' }),
-          divider(),
-          text('[DePINscan](https://depinscan.io)'),
-          text('[IoTeX](https://iotex.io)'),
-          text('[Wallet](https://wallet.iotex.io)'),
-          text('[Mine DePIN Liquidity](https://swap.mimo.exchange/pools)'),
-        ]),
-      );
+      expect(ui).toRender(<HomePanel />);
     });
   });
 });
