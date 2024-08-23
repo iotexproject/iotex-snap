@@ -43,11 +43,13 @@ describe('onNameLookup', () => {
         resolvedAddresses: [
           {
             protocol: 'ins',
+            domainName: DOMAIN_MOCK,
             resolvedAddress: ADDRESS_MOCK,
           },
         ],
       });
     });
+
     it('returns null if invalid domain', async () => {
       const request = {
         domain: INVALID_DOMAIN_MOCK,
@@ -76,6 +78,37 @@ describe('onNameLookup', () => {
         resolvedAddresses: [
           {
             protocol: 'ins',
+            domainName: IO_ADDRESS_MOCK,
+            resolvedAddress: OX_ADDRESS_MOCK,
+          },
+        ],
+      });
+    });
+    it.skip('returns resolved address and ins domain', async () => {
+      const request = {
+        domain: IO_ADDRESS_MOCK,
+        chainId: IOTEX_MAIN_CHAIN_ID_MOCK,
+      };
+
+      jest.spyOn(global, 'fetch').mockResolvedValueOnce({
+        json: async () => ({
+          data: {
+            account: {
+              wrappedDomains: [
+                {
+                  name: DOMAIN_MOCK,
+                },
+              ],
+            },
+          },
+        }),
+      } as any);
+
+      expect(await onNameLookup(request)).toStrictEqual({
+        resolvedAddresses: [
+          {
+            protocol: 'ins',
+            domainName: DOMAIN_MOCK,
             resolvedAddress: OX_ADDRESS_MOCK,
           },
         ],

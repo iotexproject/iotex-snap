@@ -2,11 +2,6 @@ import { fromBytes } from '@iotexproject/iotex-address-ts';
 import { type DomainLookupResult } from '@metamask/snaps-sdk';
 import { bech32 } from 'bech32';
 
-/**
- * Convert an IoTeX address to an Ethereum address.
- * @param address - The address to resolve.
- * @returns If successful, an object containing the resolvedAddress. Null otherwise.
- */
 export function convertIoToOxAddress(
   address: string,
 ): DomainLookupResult | null {
@@ -26,6 +21,7 @@ export function convertIoToOxAddress(
           resolvedAddresses: [
             {
               protocol: 'ins',
+              domainName: address,
               resolvedAddress: `0x${resolvedAddress}`,
             },
           ],
