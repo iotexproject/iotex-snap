@@ -6,17 +6,15 @@ import {
   showMyConvertedAddresses,
   showAddrConvertResult,
   updateInterfaceToHomePage,
+  fetchDepinProjects,
+  showProjectInfo,
+  clearDepinProjects,
+  fetchDSProjects,
+  showLoadingState,
+  showErrorPage,
 } from './ui';
 import { convert0xToIoAddress, convertIoToOxAddress } from '../utils/convert';
 
-/**
- * Handle incoming user events coming from the MetaMask clients open interfaces.
- *
- * @param params - The event parameters.
- * @param params.id - The Snap interface ID where the event was fired.
- * @param params.event - The event object containing the event type, name and value.
- * @see https://docs.metamask.io/snaps/reference/exports/#onuserinput
- */
 export const onUserInput: OnUserInputHandler = async ({ id, event }) => {
   if (event.type === UserInputEventType.ButtonClickEvent) {
     switch (event.name) {
@@ -30,6 +28,14 @@ export const onUserInput: OnUserInputHandler = async ({ id, event }) => {
 
       case 'go-back':
         await updateInterfaceToHomePage(id);
+        break;
+
+      case 'fetch-ds-projects':
+        await fetchDepinProjects(id);
+        break;
+
+      case 'clear-ds-projects':
+        await clearDepinProjects(id);
         break;
 
       default:
@@ -47,14 +53,25 @@ export const onUserInput: OnUserInputHandler = async ({ id, event }) => {
 
     processSubmitedAddress(id, address as string);
   }
+
+  if (
+    event.type === UserInputEventType.InputChangeEvent &&
+    event.name === 'ds-projects'
+  ) {
+    await showLoadingState(id);
+
+    const projectName = event.value;
+    const projects = await fetchDSProjects();
+    const project = projects.find((prj) => prj.project_name === projectName);
+
+    if (!project) {
+      await showErrorPage(id, "Couldn't fetch project info");
+    } else {
+      showProjectInfo(id, project);
+    }
+  }
 };
 
-/**
- *
- * @param id - The Snap interface ID where the event was fired.
- * @param address - user's address from input to convert
- * @returns Returns if invalid input, otherwise shows result
- */
 const processSubmitedAddress = async (id: string, address: string) => {
   if (!address) {
     await showAddrConvertResult(id, '', 'Invalid address');
@@ -64,12 +81,6 @@ const processSubmitedAddress = async (id: string, address: string) => {
   convertAddress(id, address);
 };
 
-/**
- * Convert an address from 0x to io or vice versa.
- *
- * @param id - The Snap interface ID where the event was fired.
- * @param address - The address to convert.
- */
 const convertAddress = async (id: string, address: string) => {
   let convertedAddress: string | undefined;
 

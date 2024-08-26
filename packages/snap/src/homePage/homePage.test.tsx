@@ -11,6 +11,7 @@ import { ConnectedAccountsList } from '../components/ConnectedAccount';
 
 const CONVERT_ADDRESS = 'convert-address';
 const SHOW_MY_ADDRESS = 'show-my-addresses';
+const FETCH_DS_PROJECTS = 'fetch-ds-projects';
 
 describe('onHomePage', () => {
   describe('Menu', () => {
@@ -98,6 +99,17 @@ describe('onHomePage', () => {
           convertedAddr={IO_ADDRESS_MOCK}
         />,
       );
+    });
+  });
+
+  describe('DePIN Scan project fetching', () => {
+    it('Should list depinscan projects', async () => {
+      const { homeScreen, response } = await setup();
+
+      await homeScreen.clickElement(FETCH_DS_PROJECTS);
+
+      const resultScreen = response.getInterface();
+      expect(resultScreen).toBeDefined();
     });
   });
 });
