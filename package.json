@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "A snap that understands io addresses, supports INS domains and is friedly with DePIN assets",
   "homepage": "https://github.com/MetaMask/template-snap-monorepo#readme",
