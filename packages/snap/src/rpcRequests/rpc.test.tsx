@@ -1,8 +1,8 @@
 import { expect } from '@jest/globals';
 import { installSnap } from '@metamask/snaps-jest';
-import { Box, Copyable, Divider, Text } from '@metamask/snaps-sdk/jsx';
 
 import { HomePanel } from '../components/HomePanel';
+import { ConnectedAccountDialog } from '../components/ConnectedAccount';
 
 describe('onRpcRequest', () => {
   it('throws an error if the requested method does not exist', async () => {
@@ -41,13 +41,10 @@ describe('onRpcRequest', () => {
       const ui = await response.getInterface();
       expect(ui.type).toBe('alert');
       expect(ui).toRender(
-        <Box>
-          <Text>Your connected account is:</Text>
-          <Copyable value={OX_ADDRESS_MOCK} />
-          <Divider />
-          <Text>The io representation of the address is:</Text>
-          <Copyable value={IO_ADDRESS_MOCK} />
-        </Box>,
+        <ConnectedAccountDialog
+          connectedAddr={OX_ADDRESS_MOCK}
+          ioAddress={IO_ADDRESS_MOCK}
+        />,
       );
 
       await ui.ok();

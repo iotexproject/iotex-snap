@@ -1,7 +1,7 @@
 import { describe, it } from '@jest/globals';
 import type { ChainId } from '@metamask/snaps-sdk';
 
-import { onNameLookup } from '.';
+import { getAccountDomains, onNameLookup } from '.';
 
 const DOMAIN_MOCK = 'satoshi.io';
 const INVALID_DOMAIN_MOCK = 'invalid.i';
@@ -49,7 +49,26 @@ describe('onNameLookup', () => {
         ],
       });
     });
+    it('returns null if no resolved addresses', async () => {
+      const request = {
+        domain: DOMAIN_MOCK,
+        chainId: IOTEX_MAIN_CHAIN_ID_MOCK,
+      };
 
+      jest.spyOn(global, 'fetch').mockResolvedValueOnce({
+        json: async () => ({
+          data: {
+            domains: [
+              {
+                resolvedAddress: null,
+              },
+            ],
+          },
+        }),
+      } as any);
+
+      expect(await onNameLookup(request)).toEqual(null);
+    });
     it('returns null if invalid domain', async () => {
       const request = {
         domain: INVALID_DOMAIN_MOCK,
@@ -57,6 +76,22 @@ describe('onNameLookup', () => {
       };
 
       expect(await onNameLookup(request)).toBeNull();
+    });
+    it('returns null if owner not found', async () => {
+      const request = {
+        domain: DOMAIN_MOCK,
+        chainId: IOTEX_MAIN_CHAIN_ID_MOCK,
+      };
+
+      jest.spyOn(global, 'fetch').mockResolvedValueOnce({
+        json: async () => ({
+          data: {
+            domains: [],
+          },
+        }),
+      } as any);
+
+      expect(await onNameLookup(request)).toEqual(null);
     });
     it('returns null if not iotex mainnet', async () => {
       const request = {
@@ -84,12 +119,7 @@ describe('onNameLookup', () => {
         ],
       });
     });
-    it.skip('returns resolved address and ins domain', async () => {
-      const request = {
-        domain: IO_ADDRESS_MOCK,
-        chainId: IOTEX_MAIN_CHAIN_ID_MOCK,
-      };
-
+    it('returns resolved address and ins domain', async () => {
       jest.spyOn(global, 'fetch').mockResolvedValueOnce({
         json: async () => ({
           data: {
@@ -104,15 +134,20 @@ describe('onNameLookup', () => {
         }),
       } as any);
 
-      expect(await onNameLookup(request)).toStrictEqual({
-        resolvedAddresses: [
-          {
-            protocol: 'ins',
-            domainName: DOMAIN_MOCK,
-            resolvedAddress: OX_ADDRESS_MOCK,
+      expect(await getAccountDomains(IO_ADDRESS_MOCK)).toEqual(DOMAIN_MOCK);
+    });
+    it('returns null if account doesnt have domains', async () => {
+      jest.spyOn(global, 'fetch').mockResolvedValueOnce({
+        json: async () => ({
+          data: {
+            account: {
+              wrappedDomains: [],
+            },
           },
-        ],
-      });
+        }),
+      } as any);
+
+      expect(await getAccountDomains(IO_ADDRESS_MOCK)).toEqual(null);
     });
     it('returns null if invalid io address', async () => {
       const request = {

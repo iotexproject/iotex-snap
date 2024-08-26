@@ -10,23 +10,18 @@ export function convertIoToOxAddress(
   }
 
   try {
-    const { prefix, words } = bech32.decode(address);
-    if (prefix !== 'io') {
-      throw new Error(`hrp ${prefix} and address prefix io don't match`);
-    }
+    const { words } = bech32.decode(address);
     const resolvedAddress = byteArrayToHexString(bech32.fromWords(words));
 
-    return resolvedAddress
-      ? {
-          resolvedAddresses: [
-            {
-              protocol: 'ins',
-              domainName: address,
-              resolvedAddress: `0x${resolvedAddress}`,
-            },
-          ],
-        }
-      : null;
+    return {
+      resolvedAddresses: [
+        {
+          protocol: 'ins',
+          domainName: address,
+          resolvedAddress: `0x${resolvedAddress}`,
+        },
+      ],
+    };
   } catch (error) {
     return null;
   }
@@ -46,11 +41,9 @@ export function convert0xToIoAddress(
 
   try {
     const addressBytes = hexStringToByteArray(address.substring(2));
-    const resolvedAddress = fromBytes(addressBytes).string();
 
-    return resolvedAddress ? { resolvedAddress } : null;
+    return { resolvedAddress: fromBytes(addressBytes).string() };
   } catch (error: any) {
-    console.log(error);
     throw Error('Error converting 0x Address');
   }
 }
