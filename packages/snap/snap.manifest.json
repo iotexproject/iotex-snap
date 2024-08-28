@@ -7,7 +7,7 @@
     "url": "https://github.com/machinefi/iotex-snap.git"
   },
   "source": {
-    "shasum": "/df9ZBBNjZTxdAKkl+caKm4DGrnAo9ZROL1wAB9CNxk=",
+    "shasum": "eAjaGbNkZ2Vbk/IZlo2zf9lVpJjpimrm6/3eATpH1ss=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
