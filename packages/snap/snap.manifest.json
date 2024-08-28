@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.4.0",
   "description": "A snap with a simple UI for interacting with the IoTeX blockchain and DePIN assets",
   "proposedName": "IoTeX",
   "repository": {
@@ -7,7 +7,7 @@
     "url": "https://github.com/machinefi/iotex-snap.git"
   },
   "source": {
-    "shasum": "U1hWMlbkvEnlRcra8AjJZgCjvFMz7kWlWhkGUUK9pVM=",
+    "shasum": "bbifJGGZVS2WPXNQfBcre46fCaYDQZDhpRAn7C+iXUM=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
@@ -27,9 +27,7 @@
     "endowment:network-access": {},
     "snap_manageState": {},
     "endowment:name-lookup": {
-      "chains": [
-        "eip155:4689"
-      ]
+      "chains": ["eip155:4689"]
     },
     "endowment:ethereum-provider": {}
   },

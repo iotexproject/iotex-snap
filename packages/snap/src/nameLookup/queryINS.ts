@@ -1,8 +1,18 @@
-export const getDomainQuery = `
+export const getDomainOwnerQuery = `
   query getDomain($name: String!) {
     domains(where: { name: $name }) {
       resolvedAddress {
         id
+      }
+    }
+  }
+`;
+
+export const getDomainByAddrQuery = `
+  query getDomain($address: String!) {
+    account(id: $address) {
+      wrappedDomains {
+        name
       }
     }
   }

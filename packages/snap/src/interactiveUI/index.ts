@@ -1,13 +1,50 @@
 import type { OnUserInputHandler } from '@metamask/snaps-sdk';
 import { UserInputEventType } from '@metamask/snaps-sdk';
 
+import { convert0xToIoAddress, convertIoToOxAddress } from '../utils/convert';
 import {
   showConvertForm,
   showMyConvertedAddresses,
   showAddrConvertResult,
   updateInterfaceToHomePage,
+  listDepinProjects,
+  showProjectInfo,
+  clearDepinProjects,
+  fetchDSProjects,
+  showLoadingState,
+  showErrorPage,
 } from './ui';
-import { convert0xToIoAddress, convertIoToOxAddress } from '../utils/convert';
+
+const convertAddress = async (id: string, address: string) => {
+  let convertedAddress: string | undefined;
+
+  if (address) {
+    if (address.startsWith('0x')) {
+      const convertResult = convert0xToIoAddress(address);
+      convertedAddress = convertResult?.resolvedAddress;
+    }
+
+    if (address.startsWith('io')) {
+      const convertResult = convertIoToOxAddress(address);
+      convertedAddress = convertResult?.resolvedAddresses[0].resolvedAddress;
+    }
+  }
+
+  await showAddrConvertResult(
+    id,
+    address,
+    convertedAddress ?? 'Invalid address',
+  );
+};
+
+const processSubmitedAddress = async (id: string, address: string) => {
+  if (!address) {
+    await showAddrConvertResult(id, '', 'Invalid address');
+    return;
+  }
+
+  await convertAddress(id, address);
+};
 
 /**
  * Handle incoming user events coming from the MetaMask clients open interfaces.
@@ -32,6 +69,14 @@ export const onUserInput: OnUserInputHandler = async ({ id, event }) => {
         await updateInterfaceToHomePage(id);
         break;
 
+      case 'fetch-ds-projects':
+        await listDepinProjects(id);
+        break;
+
+      case 'clear-ds-projects':
+        await clearDepinProjects(id);
+        break;
+
       default:
         break;
     }
@@ -41,53 +86,29 @@ export const onUserInput: OnUserInputHandler = async ({ id, event }) => {
     event.type === UserInputEventType.FormSubmitEvent &&
     event.name === 'address-form'
   ) {
-    const address = event.value['address-input'];
-    processSubmitedAddress(id, address);
-  }
-};
+    const { address } = event.value;
 
-/**
- *
- * @param id - The Snap interface ID where the event was fired.
- * @param address - user's address from input to convert
- * @returns Returns if invalid input, otherwise shows result
- */
-const processSubmitedAddress = async (
-  id: string,
-  address: string | undefined,
-) => {
-  if (!address) {
-    await showAddrConvertResult(id, '', 'Invalid address');
-    return;
-  }
-
-  convertAddress(id, address);
-};
-
-/**
- * Convert an address from 0x to io or vice versa.
- *
- * @param id - The Snap interface ID where the event was fired.
- * @param address - The address to convert.
- */
-const convertAddress = async (id: string, address: string) => {
-  let convertedAddress: string | undefined;
-
-  if (address) {
-    if (address.startsWith('0x')) {
-      const convertResult = convert0xToIoAddress(address);
-      convertedAddress = convertResult?.resolvedAddress;
+    if (!address) {
+      return;
     }
 
-    if (address.startsWith('io')) {
-      const convertResult = convertIoToOxAddress(address);
-      convertedAddress = convertResult?.resolvedAddresses[0].resolvedAddress;
-    }
+    await processSubmitedAddress(id, address as string);
   }
 
-  await showAddrConvertResult(
-    id,
-    address,
-    convertedAddress || 'Invalid address',
-  );
+  if (
+    event.type === UserInputEventType.InputChangeEvent &&
+    event.name === 'ds-projects'
+  ) {
+    await showLoadingState(id);
+
+    const projectName = event.value;
+    const projects = await fetchDSProjects();
+    const project = projects.find((prj) => prj.project_name === projectName);
+
+    if (project) {
+      await showProjectInfo(id, project);
+    } else {
+      await showErrorPage(id, "Couldn't fetch project info");
+    }
+  }
 };

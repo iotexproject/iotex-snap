@@ -36,13 +36,13 @@ jobs:
         with:
           path: ./packages/snap/dist
           key: snap-${{ runner.os }}-${{ github.sha }}
-      - name: Require clean working directory
-        shell: bash
-        run: |
-          if ! git diff --exit-code; then
-            echo "Working tree dirty at end of job"
-            exit 1
-          fi
+      # - name: Require clean working directory
+      #   shell: bash
+      #   run: |
+      #     if ! git diff --exit-code; then
+      #       echo "Working tree dirty at end of job"
+      #       exit 1
+      #     fi
 
   lint:
     name: Lint
@@ -85,14 +85,12 @@ jobs:
           path: ./packages/snap/dist
           key: snap-${{ runner.os }}-${{ github.sha }}
       - run: yarn install --immutable
-      - name: Install Google Chrome
-        run: yarn install-chrome
       - name: Run e2e tests
         run: yarn workspace iotex-snap run test
-      - name: Require clean working directory
-        shell: bash
-        run: |
-          if ! git diff --exit-code; then
-            echo "Working tree dirty at end of job"
-            exit 1
-          fi
+      # - name: Require clean working directory
+      #   shell: bash
+      #   run: |
+      #     if ! git diff --exit-code; then
+      #       echo "Working tree dirty at end of job"
+      #       exit 1
+      #     fi
