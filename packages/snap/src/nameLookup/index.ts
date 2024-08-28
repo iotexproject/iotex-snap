@@ -5,7 +5,7 @@ import type {
 
 import { convertIoToOxAddress } from '../utils/convert';
 import { getDomainOwnerQuery, INS_SUBGRAPH } from './queryINS';
-import { AccountData, DomainData } from './types';
+import type { AccountData, DomainData } from './types';
 
 const IOTEX_MAINNET_CHAIN_ID = 'eip155:4689';
 const IOTEX_TESTNET_CHAIN_ID = 'eip155:4690';
@@ -33,6 +33,11 @@ export const onNameLookup: OnNameLookupHandler = async (request) => {
   return null;
 };
 
+/**
+ * Get the owner of an IoTeX domain.
+ * @param domain - The domain to resolve.
+ * @returns If successful, an object containing the resolvedAddress. Null otherwise.
+ */
 export async function getInsDomainOwner(
   domain: string,
 ): Promise<DomainLookupResult | null> {
@@ -57,6 +62,12 @@ export async function getInsDomainOwner(
     : null;
 }
 
+/**
+ * Get the domains of the account.
+ *
+ * @param address - The address of the owner.
+ * @returns If successful, an object containing the owner domains. Null otherwise.
+ */
 export async function getAccountDomains(
   address: string,
 ): Promise<string | null | undefined> {
@@ -71,6 +82,11 @@ export async function getAccountDomains(
   return resolvedDomain;
 }
 
+/**
+ * Send the POST request to ins subgraph.
+ * @param domain - The domain to resolve.
+ * @returns If successful, an object containing the response. Null otherwise.
+ */
 async function sendDomainRequest(domain: string): Promise<DomainData> {
   const res = await fetch(INS_SUBGRAPH, {
     method: 'POST',
@@ -88,6 +104,11 @@ async function sendDomainRequest(domain: string): Promise<DomainData> {
   return data;
 }
 
+/**
+ * Send the POST request to ins subgraph.
+ * @param address - The owner address.
+ * @returns If successful, an object containing the response. Null otherwise.
+ */
 async function sendAccountRequest(address: string): Promise<AccountData> {
   const res = await fetch(INS_SUBGRAPH, {
     method: 'POST',

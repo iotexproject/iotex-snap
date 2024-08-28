@@ -1,10 +1,18 @@
 import { rpcErrors } from '@metamask/rpc-errors';
 import type { JsonRpcRequest, OnRpcRequestHandler } from '@metamask/snaps-sdk';
 
-import { convert0xToIoAddress } from '../utils/convert';
-import { createInterface } from '../interactiveUI/ui';
 import { ConnectedAccountDialog } from '../components/ConnectedAccount';
+import { createInterface } from '../interactiveUI/ui';
+import { convert0xToIoAddress } from '../utils/convert';
 
+/**
+ * Handle incoming JSON-RPC requests, sent through `wallet_invokeSnap`.
+ *
+ * @param args - The request handler args as object.
+ * @param args.request - A validated JSON-RPC request object.
+ * @returns The result of `snap_dialog`.
+ * @throws If the request method is not valid for this snap.
+ */
 export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
   switch (request.method) {
     case 'convert': {
@@ -38,6 +46,11 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
   }
 };
 
+/**
+ * Handle incoming JSON-RPC requests to open the home page.
+ *
+ * @returns The result of `snap_dialog`.
+ */
 async function processHomeRpcRequest() {
   const interfaceId = await createInterface();
 
@@ -50,7 +63,13 @@ async function processHomeRpcRequest() {
   });
 }
 
-function processConvertRpcRequest(request: JsonRpcRequest) {
+/**
+ * Handle incoming JSON-RPC requests to open the home page.
+ *
+ * @param request - JsonRpcRequest.
+ * @returns The result of `rpcConnectedAddressPanel`.
+ */
+async function processConvertRpcRequest(request: JsonRpcRequest) {
   const params = request?.params as { address: string } | undefined;
   if (!params?.address) {
     throw new Error('Invalid params.');
@@ -67,7 +86,15 @@ function processConvertRpcRequest(request: JsonRpcRequest) {
   return rpcConnectedAddressPanel(addressToConvert, res);
 }
 
-function rpcConnectedAddressPanel(
+/**
+ * Requests a dialog with connected address and it's converted version.
+ *
+ * @param addressToConvert - Address to convert 0x or io.
+ * @param res - An object with converted version of the address.
+ * @param res.resolvedAddress - Converted version of the address.
+ * @returns The result of `rpcConnectedAddressPanel`.
+ */
+async function rpcConnectedAddressPanel(
   addressToConvert: string,
   res: { resolvedAddress: string },
 ) {

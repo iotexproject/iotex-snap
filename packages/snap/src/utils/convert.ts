@@ -2,6 +2,11 @@ import { fromBytes } from '@iotexproject/iotex-address-ts';
 import { type DomainLookupResult } from '@metamask/snaps-sdk';
 import { bech32 } from 'bech32';
 
+/**
+ * Convert an IoTeX address to an Ethereum address.
+ * @param address - The address to resolve.
+ * @returns If successful, an object containing the resolvedAddress. Null otherwise.
+ */
 export function convertIoToOxAddress(
   address: string,
 ): DomainLookupResult | null {
@@ -76,6 +81,6 @@ function hexStringToByteArray(hexString: string) {
  */
 function byteArrayToHexString(byteArray: number[]) {
   return Array.from(byteArray, (byte) => {
-    return ('0' + (byte & 0xff).toString(16)).slice(-2);
+    return `0${(byte & 0xff).toString(16)}`.slice(-2);
   }).join('');
 }

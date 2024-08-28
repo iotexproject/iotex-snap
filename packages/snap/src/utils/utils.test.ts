@@ -10,7 +10,7 @@ describe('Utils', () => {
   });
   it('should return null if incorrect io address', () => {
     const res = convertIoToOxAddress('io 1nwldj5');
-    expect(res).toBe(null);
+    expect(res).toBeNull();
   });
   it('should throw if the addr doesnt start with 0x', () => {
     expect(() =>

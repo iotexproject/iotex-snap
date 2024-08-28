@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Box, Button, Heading, Link } from '@metamask/snaps-sdk/jsx';
 
 import {
@@ -20,6 +21,11 @@ export type DSProject = {
   estimated_daily_earnings: string | number | null;
 };
 
+/**
+ * Shows a home page.
+ *
+ * @returns A home page.
+ */
 export function HomePanel() {
   return (
     <Box>

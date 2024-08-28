@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import {
   Box,
   Button,
@@ -9,6 +10,11 @@ import {
   Copyable,
 } from '@metamask/snaps-sdk/jsx';
 
+/**
+ * Shows a form of address convertion.
+ *
+ * @returns A address convert form.
+ */
 export function ConvertAddressForm() {
   return (
     <Box>
@@ -28,6 +34,14 @@ export function ConvertAddressForm() {
   );
 }
 
+/**
+ * Shows a resulted screen for address convertion.
+ *
+ * @param params - JSX Elements params.
+ * @param params.originalAddr - The address to convert.
+ * @param params.convertedAddr - The converted address.
+ * @returns A resulted screen with addresses.
+ */
 export function ConvertAddressSuccess({
   originalAddr,
   convertedAddr,

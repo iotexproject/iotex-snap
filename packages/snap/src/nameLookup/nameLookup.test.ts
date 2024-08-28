@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import { describe, it } from '@jest/globals';
 import type { ChainId } from '@metamask/snaps-sdk';
 
@@ -67,7 +68,7 @@ describe('onNameLookup', () => {
         }),
       } as any);
 
-      expect(await onNameLookup(request)).toEqual(null);
+      expect(await onNameLookup(request)).toBeNull();
     });
     it('returns null if invalid domain', async () => {
       const request = {
@@ -91,7 +92,7 @@ describe('onNameLookup', () => {
         }),
       } as any);
 
-      expect(await onNameLookup(request)).toEqual(null);
+      expect(await onNameLookup(request)).toBeNull();
     });
     it('returns null if not iotex mainnet', async () => {
       const request = {
@@ -134,7 +135,9 @@ describe('onNameLookup', () => {
         }),
       } as any);
 
-      expect(await getAccountDomains(IO_ADDRESS_MOCK)).toEqual(DOMAIN_MOCK);
+      expect(await getAccountDomains(IO_ADDRESS_MOCK)).toStrictEqual(
+        DOMAIN_MOCK,
+      );
     });
     it('returns null if account doesnt have domains', async () => {
       jest.spyOn(global, 'fetch').mockResolvedValueOnce({
@@ -147,7 +150,7 @@ describe('onNameLookup', () => {
         }),
       } as any);
 
-      expect(await getAccountDomains(IO_ADDRESS_MOCK)).toEqual(null);
+      expect(await getAccountDomains(IO_ADDRESS_MOCK)).toBeNull();
     });
     it('returns null if invalid io address', async () => {
       const request = {

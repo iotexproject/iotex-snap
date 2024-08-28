@@ -1,17 +1,26 @@
 import { expect } from '@jest/globals';
 import { installSnap } from '@metamask/snaps-jest';
 
-import { HomePanel } from '../components/HomePanel';
+import { ConnectedAccountsList } from '../components/ConnectedAccount';
 import {
   ConvertAddressForm,
   ConvertAddressSuccess,
 } from '../components/ConvertAddress';
+import { HomePanel } from '../components/HomePanel';
 import { convert0xToIoAddress } from '../utils/convert';
-import { ConnectedAccountsList } from '../components/ConnectedAccount';
 
 const CONVERT_ADDRESS = 'convert-address';
 const SHOW_MY_ADDRESS = 'show-my-addresses';
 const FETCH_DS_PROJECTS = 'fetch-ds-projects';
+
+const setup = async () => {
+  const { onHomePage } = await installSnap();
+
+  const response = await onHomePage();
+  const homeScreen = response.getInterface();
+
+  return { response, homeScreen };
+};
 
 describe('onHomePage', () => {
   describe('Menu', () => {
@@ -113,12 +122,3 @@ describe('onHomePage', () => {
     });
   });
 });
-
-const setup = async () => {
-  const { onHomePage } = await installSnap();
-
-  let response = await onHomePage();
-  let homeScreen = response.getInterface();
-
-  return { response, homeScreen };
-};

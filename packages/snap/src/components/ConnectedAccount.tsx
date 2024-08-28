@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import {
   Box,
   Text,
@@ -7,6 +8,14 @@ import {
   Button,
 } from '@metamask/snaps-sdk/jsx';
 
+/**
+ * Shows a dialog with connected addresses.
+ *
+ * @param params - JSX Elements params.
+ * @param params.connectedAddr - The connected address to convert.
+ * @param params.ioAddress - The converted address.
+ * @returns A home page.
+ */
 export function ConnectedAccountDialog({
   connectedAddr,
   ioAddress,
@@ -25,6 +34,13 @@ export function ConnectedAccountDialog({
   );
 }
 
+/**
+ * Shows a resulted screen for address convertion.
+ *
+ * @param params - JSX Elements params.
+ * @param params.addresses - The address to convert.
+ * @returns A list with converted addresses.
+ */
 export function ConnectedAccountsList({
   addresses,
 }: {

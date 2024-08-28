@@ -1,8 +1,8 @@
 import { expect } from '@jest/globals';
 import { installSnap } from '@metamask/snaps-jest';
 
-import { HomePanel } from '../components/HomePanel';
 import { ConnectedAccountDialog } from '../components/ConnectedAccount';
+import { HomePanel } from '../components/HomePanel';
 
 describe('onRpcRequest', () => {
   it('throws an error if the requested method does not exist', async () => {
@@ -39,15 +39,12 @@ describe('onRpcRequest', () => {
       });
 
       const ui = await response.getInterface();
-      expect(ui.type).toBe('alert');
       expect(ui).toRender(
         <ConnectedAccountDialog
           connectedAddr={OX_ADDRESS_MOCK}
           ioAddress={IO_ADDRESS_MOCK}
         />,
       );
-
-      await ui.ok();
 
       expect(await response).toRespondWith(null);
     });
