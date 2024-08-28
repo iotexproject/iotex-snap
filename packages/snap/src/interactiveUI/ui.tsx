@@ -301,7 +301,5 @@ async function setDePINProjectsState(projects: DSProject[]) {
  * @returns Options DePIN Scan projects.
  */
 function buildOptions(projects: DSProject[]): JSX.Element[] {
-  return projects.map(
-    (prj: DSProject) => (<DSProjectRow project={prj} />) as JSX.Element,
-  );
+  return projects.map((prj: DSProject) => <DSProjectRow project={prj} />);
 }

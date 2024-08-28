@@ -39,6 +39,7 @@ describe('onRpcRequest', () => {
       });
 
       const ui = await response.getInterface();
+      await ui.ok();
       expect(ui).toRender(
         <ConnectedAccountDialog
           connectedAddr={OX_ADDRESS_MOCK}
