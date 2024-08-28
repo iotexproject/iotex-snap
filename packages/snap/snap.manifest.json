@@ -27,9 +27,7 @@
     "endowment:network-access": {},
     "snap_manageState": {},
     "endowment:name-lookup": {
-      "chains": [
-        "eip155:4689"
-      ]
+      "chains": ["eip155:4689"]
     },
     "endowment:ethereum-provider": {}
   },
