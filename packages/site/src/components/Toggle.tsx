@@ -90,6 +90,7 @@ const ToggleCircle = styled.div<CheckedProps>`
 `;
 
 export const Toggle = ({
+  // eslint-disable-next-line @typescript-eslint/unbound-method
   onToggle,
   defaultChecked = false,
 }: {

@@ -3,9 +3,9 @@ import type {
   OnNameLookupHandler,
 } from '@metamask/snaps-sdk';
 
-import { convertIoToOxAddress } from '../utils/convert';
 import { getDomainOwnerQuery, INS_SUBGRAPH } from './queryINS';
 import type { AccountData, DomainData } from './types';
+import { convertIoToOxAddress } from '../utils/convert';
 
 const IOTEX_MAINNET_CHAIN_ID = 'eip155:4689';
 const IOTEX_TESTNET_CHAIN_ID = 'eip155:4690';
@@ -35,6 +35,7 @@ export const onNameLookup: OnNameLookupHandler = async (request) => {
 
 /**
  * Get the owner of an IoTeX domain.
+ *
  * @param domain - The domain to resolve.
  * @returns If successful, an object containing the resolvedAddress. Null otherwise.
  */
@@ -84,6 +85,7 @@ export async function getAccountDomains(
 
 /**
  * Send the POST request to ins subgraph.
+ *
  * @param domain - The domain to resolve.
  * @returns If successful, an object containing the response. Null otherwise.
  */
@@ -106,6 +108,7 @@ async function sendDomainRequest(domain: string): Promise<DomainData> {
 
 /**
  * Send the POST request to ins subgraph.
+ *
  * @param address - The owner address.
  * @returns If successful, an object containing the response. Null otherwise.
  */

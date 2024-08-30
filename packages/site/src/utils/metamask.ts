@@ -5,7 +5,7 @@ import { getSnaps } from './snap';
  *
  * @returns True if the MetaMask version supports Snaps, false otherwise.
  */
-export const detectSnaps = async () => {
+export const detectSnaps = async (): Promise<boolean> => {
   if (window.ethereum?.detected) {
     for (const provider of window.ethereum.detected) {
       try {
@@ -53,7 +53,7 @@ export const detectSnaps = async () => {
  *
  * @returns True if the MetaMask version is Flask, false otherwise.
  */
-export const isFlask = async () => {
+export const isFlask = async (): Promise<boolean> => {
   const provider = window.ethereum;
 
   try {

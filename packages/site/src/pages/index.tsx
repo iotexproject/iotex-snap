@@ -25,7 +25,7 @@ const Container = styled.div`
   flex: 1;
   margin-top: 7.6rem;
   margin-bottom: 7.6rem;
-  ${({ theme }) => theme.mediaQueries.small} {
+  ${({ theme }): string | undefined => theme.mediaQueries.small} {
     padding-left: 2.4rem;
     padding-right: 2.4rem;
     margin-top: 2rem;
@@ -41,16 +41,16 @@ const Heading = styled.h1`
 `;
 
 const Span = styled.span`
-  color: ${(props) => props.theme.colors.primary?.default};
+  color: ${(props): string | undefined => props.theme.colors.primary?.default};
 `;
 
 const Subtitle = styled.p`
-  font-size: ${({ theme }) => theme.fontSizes.large};
+  font-size: ${({ theme }): string | undefined => theme.fontSizes.large};
   font-weight: 500;
   margin-top: 0;
   margin-bottom: 0;
-  ${({ theme }) => theme.mediaQueries.small} {
-    font-size: ${({ theme }) => theme.fontSizes.text};
+  ${({ theme }): string | undefined => theme.mediaQueries.small} {
+    font-size: ${({ theme }): string | undefined => theme.fontSizes.text};
   }
 `;
 
@@ -66,10 +66,12 @@ const CardContainer = styled.div`
 `;
 
 const Notice = styled.div`
-  background-color: ${({ theme }) => theme.colors.background?.alternative};
-  border: 1px solid ${({ theme }) => theme.colors.border?.default};
-  color: ${({ theme }) => theme.colors.text?.alternative};
-  border-radius: ${({ theme }) => theme.radii.default};
+  background-color: ${({ theme }): string | undefined =>
+    theme.colors.background?.alternative};
+  border: 1px solid
+    ${({ theme }): string | undefined => theme.colors.border?.default};
+  color: ${({ theme }): string | undefined => theme.colors.text?.alternative};
+  border-radius: ${({ theme }): string | undefined => theme.radii.default};
   padding: 2.4rem;
   margin-top: 2.4rem;
   max-width: 60rem;
@@ -78,23 +80,25 @@ const Notice = styled.div`
   & > * {
     margin: 0;
   }
-  ${({ theme }) => theme.mediaQueries.small} {
+  ${({ theme }): string | undefined => theme.mediaQueries.small} {
     margin-top: 1.2rem;
     padding: 1.6rem;
   }
 `;
 
 const ErrorMessage = styled.div`
-  background-color: ${({ theme }) => theme.colors.error?.muted};
-  border: 1px solid ${({ theme }) => theme.colors.error?.default};
-  color: ${({ theme }) => theme.colors.error?.alternative};
-  border-radius: ${({ theme }) => theme.radii.default};
+  background-color: ${({ theme }): string | undefined =>
+    theme.colors.error?.muted};
+  border: 1px solid
+    ${({ theme }): string | undefined => theme.colors.error?.default};
+  color: ${({ theme }): string | undefined => theme.colors.error?.alternative};
+  border-radius: ${({ theme }): string | undefined => theme.radii.default};
   padding: 2.4rem;
   margin-bottom: 2.4rem;
   margin-top: 2.4rem;
   max-width: 60rem;
   width: 100%;
-  ${({ theme }) => theme.mediaQueries.small} {
+  ${({ theme }): string | undefined => theme.mediaQueries.small} {
     padding: 1.6rem;
     margin-bottom: 1.2rem;
     margin-top: 1.2rem;
@@ -102,14 +106,14 @@ const ErrorMessage = styled.div`
   }
 `;
 
-const Index = () => {
+const Index = (): JSX.Element => {
   const [state, dispatch] = useContext(MetaMaskContext);
 
   const isMetaMaskReady = isLocalSnap(defaultSnapOrigin)
     ? state.isFlask
     : state.snapsDetected;
 
-  const handleConnectClick = async () => {
+  const handleConnectClick = async (): Promise<void> => {
     try {
       await connectSnap();
       const installedSnap = await getSnap();
@@ -124,7 +128,7 @@ const Index = () => {
     }
   };
 
-  const handleConvertClick = async () => {
+  const handleConvertClick = async (): Promise<void> => {
     try {
       await convertAddress();
     } catch (error) {

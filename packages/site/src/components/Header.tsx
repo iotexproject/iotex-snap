@@ -1,11 +1,11 @@
 import { useContext } from 'react';
 import styled, { useTheme } from 'styled-components';
 
-import { MetamaskActions, MetaMaskContext } from '../hooks';
-import { connectSnap, getThemePreference, getSnap } from '../utils';
 import { HeaderButtons } from './Buttons';
 import { SnapLogo } from './SnapLogo';
 import { Toggle } from './Toggle';
+import { MetamaskActions, MetaMaskContext } from '../hooks';
+import { connectSnap, getThemePreference, getSnap } from '../utils';
 
 const HeaderWrapper = styled.header`
   display: flex;
@@ -39,6 +39,7 @@ const RightContainer = styled.div`
 `;
 
 export const Header = ({
+  // eslint-disable-next-line @typescript-eslint/unbound-method
   handleToggleClick,
 }: {
   handleToggleClick(): void;

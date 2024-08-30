@@ -4,6 +4,7 @@ import { bech32 } from 'bech32';
 
 /**
  * Convert an IoTeX address to an Ethereum address.
+ *
  * @param address - The address to resolve.
  * @returns If successful, an object containing the resolvedAddress. Null otherwise.
  */
@@ -27,13 +28,14 @@ export function convertIoToOxAddress(
         },
       ],
     };
-  } catch (error) {
+  } catch {
     return null;
   }
 }
 
 /**
  * Convert an Ethereum address to an IoTeX address.
+ *
  * @param address - The address to resolve.
  * @returns If successful, an object containing the resolvedAddress. Null otherwise.
  */
@@ -48,17 +50,18 @@ export function convert0xToIoAddress(
     const addressBytes = hexStringToByteArray(address.substring(2));
 
     return { resolvedAddress: fromBytes(addressBytes).string() };
-  } catch (error: any) {
+  } catch {
     throw Error('Error converting 0x Address');
   }
 }
 
 /**
  * Helper function to convert hex string to bytes array.
+ *
  * @param hexString - Hex part of 0x address.
  * @returns If successful, an array of bytes.
  */
-function hexStringToByteArray(hexString: string) {
+function hexStringToByteArray(hexString: string): Uint8Array {
   if (hexString.length % 2 !== 0) {
     throw new Error('Hex string has an odd length');
   }
@@ -76,10 +79,11 @@ function hexStringToByteArray(hexString: string) {
 
 /**
  * Helper function to convert bytes array to hex string.
+ *
  * @param byteArray - Array of bytes.
  * @returns Hex string.
  */
-function byteArrayToHexString(byteArray: number[]) {
+function byteArrayToHexString(byteArray: number[]): string {
   return Array.from(byteArray, (byte) => {
     // eslint-disable-next-line no-bitwise
     return `0${(byte & 0xff).toString(16)}`.slice(-2);

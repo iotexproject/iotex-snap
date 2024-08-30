@@ -22,7 +22,7 @@ export function ConnectedAccountDialog({
 }: {
   connectedAddr: string;
   ioAddress: string;
-}) {
+}): JSX.Element {
   return (
     <Box>
       <Text>Your connected account is:</Text>
@@ -45,7 +45,7 @@ export function ConnectedAccountsList({
   addresses,
 }: {
   addresses: { [key: string]: string };
-}) {
+}): JSX.Element {
   return (
     <Box>
       <Heading>Your connected addresses</Heading>

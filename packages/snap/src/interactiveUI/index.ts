@@ -1,3 +1,4 @@
+/* eslint-disable import-x/order */
 import type { OnUserInputHandler } from '@metamask/snaps-sdk';
 import { UserInputEventType } from '@metamask/snaps-sdk';
 
@@ -15,7 +16,7 @@ import {
   showErrorPage,
 } from './ui';
 
-const convertAddress = async (id: string, address: string) => {
+const convertAddress = async (id: string, address: string): Promise<void> => {
   let convertedAddress: string | undefined;
 
   if (address) {
@@ -37,7 +38,10 @@ const convertAddress = async (id: string, address: string) => {
   );
 };
 
-const processSubmitedAddress = async (id: string, address: string) => {
+const processSubmitedAddress = async (
+  id: string,
+  address: string,
+): Promise<void> => {
   if (!address) {
     await showAddrConvertResult(id, '', 'Invalid address');
     return;

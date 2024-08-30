@@ -1,5 +1,9 @@
 import { rpcErrors } from '@metamask/rpc-errors';
-import type { JsonRpcRequest, OnRpcRequestHandler } from '@metamask/snaps-sdk';
+import type {
+  DialogResult,
+  JsonRpcRequest,
+  OnRpcRequestHandler,
+} from '@metamask/snaps-sdk';
 
 import { ConnectedAccountDialog } from '../components/ConnectedAccount';
 import { createInterface } from '../interactiveUI/ui';
@@ -51,7 +55,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
  *
  * @returns The result of `snap_dialog`.
  */
-async function processHomeRpcRequest() {
+async function processHomeRpcRequest(): Promise<DialogResult> {
   const interfaceId = await createInterface();
 
   return snap.request({
@@ -69,7 +73,9 @@ async function processHomeRpcRequest() {
  * @param request - JsonRpcRequest.
  * @returns The result of `rpcConnectedAddressPanel`.
  */
-async function processConvertRpcRequest(request: JsonRpcRequest) {
+async function processConvertRpcRequest(
+  request: JsonRpcRequest,
+): Promise<DialogResult> {
   const params = request?.params as { address: string } | undefined;
   if (!params?.address) {
     throw new Error('Invalid params.');
@@ -97,7 +103,7 @@ async function processConvertRpcRequest(request: JsonRpcRequest) {
 async function rpcConnectedAddressPanel(
   addressToConvert: string,
   res: { resolvedAddress: string },
-) {
+): Promise<DialogResult> {
   return snap.request({
     method: 'snap_dialog',
     params: {

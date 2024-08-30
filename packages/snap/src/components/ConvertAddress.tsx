@@ -15,7 +15,7 @@ import {
  *
  * @returns A address convert form.
  */
-export function ConvertAddressForm() {
+export function ConvertAddressForm(): JSX.Element {
   return (
     <Box>
       <Heading>Convert Address</Heading>
@@ -48,7 +48,7 @@ export function ConvertAddressSuccess({
 }: {
   originalAddr: string;
   convertedAddr: string;
-}) {
+}): JSX.Element {
   return (
     <Box>
       <Heading>Address converted successfully</Heading>

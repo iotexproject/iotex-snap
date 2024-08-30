@@ -101,6 +101,7 @@ export const ConvertButton = (props: ComponentProps<typeof Button>) => {
 
 export const HeaderButtons = ({
   state,
+  // eslint-disable-next-line @typescript-eslint/unbound-method
   onConnectClick,
 }: {
   state: MetamaskState;
