@@ -9,8 +9,8 @@ import {
   Option,
 } from '@metamask/snaps-sdk/jsx';
 
-import { DEPINSCAN_PROJECT } from '../config/links';
 import type { DSProject } from './HomePanel';
+import { DEPINSCAN_PROJECT } from '../config/links';
 
 /**
  * Shows the page with DePIN Scan project info.
@@ -19,7 +19,7 @@ import type { DSProject } from './HomePanel';
  * @param params.project - An object with DepinScan project info.
  * @returns A project info panel.
  */
-export function ProjectInfo({ project }: { project: DSProject }) {
+export function ProjectInfo({ project }: { project: DSProject }): JSX.Element {
   return (
     <Box>
       <Heading>{project.project_name}</Heading>
@@ -68,6 +68,6 @@ export function ProjectInfo({ project }: { project: DSProject }) {
  * @param params.project - An object with DepinScan project info.
  * @returns A project info panel.
  */
-export function DSProjectRow({ project }: { project: DSProject }) {
+export function DSProjectRow({ project }: { project: DSProject }): JSX.Element {
   return <Option value={project.project_name}>{project.project_name}</Option>;
 }

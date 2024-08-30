@@ -4,7 +4,7 @@
  * @param key - The local storage key to access.
  * @returns The value stored at the key provided if the key exists.
  */
-export const getLocalStorage = (key: string) => {
+export const getLocalStorage = (key: string): string | null => {
   const { localStorage: ls } = window;
 
   if (ls !== null) {
@@ -21,7 +21,7 @@ export const getLocalStorage = (key: string) => {
  * @param key - The local storage key to set.
  * @param value - The value to set.
  */
-export const setLocalStorage = (key: string, value: string) => {
+export const setLocalStorage = (key: string, value: string): void => {
   const { localStorage: ls } = window;
 
   if (ls !== null) {

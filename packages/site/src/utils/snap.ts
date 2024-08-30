@@ -23,8 +23,9 @@ export const getSnaps = async (
  */
 export const connectSnap = async (
   snapId: string = defaultSnapOrigin,
+  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
   params: Record<'version' | string, unknown> = {},
-) => {
+): Promise<any> => {
   await window.ethereum.request({
     method: 'wallet_requestSnaps',
     params: {
@@ -57,7 +58,7 @@ export const getSnap = async (version?: string): Promise<Snap | undefined> => {
  * Invoke the "convert" method from the example snap.
  */
 
-export const convertAddress = async () => {
+export const convertAddress = async (): Promise<void> => {
   const account = await connectWallet();
 
   if (!account) {
@@ -77,13 +78,15 @@ export const convertAddress = async () => {
   });
 };
 
-export const isLocalSnap = (snapId: string) => snapId.startsWith('local:');
+export const isLocalSnap = (snapId: string): boolean =>
+  snapId.startsWith('local:');
 
 /**
  * Connect the user's MetaMask wallet.
+ *
  * @returns The account address.
  */
-async function connectWallet() {
+async function connectWallet(): Promise<string | undefined> {
   const accounts = await window.ethereum
     .request({ method: 'eth_requestAccounts' })
     .catch((ethErr) => {

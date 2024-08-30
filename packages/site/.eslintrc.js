@@ -10,6 +10,12 @@ module.exports = {
       files: ['*.ts', '*.tsx'],
       extends: ['@metamask/eslint-config-browser'],
     },
+    {
+      files: ['*.ts', '*.tsx'],
+      rules: {
+        '@typescript-eslint/explicit-function-return-type': 'off',
+      },
+    },
   ],
 
   ignorePatterns: ['.cache/', 'public/'],

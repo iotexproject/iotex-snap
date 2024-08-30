@@ -26,7 +26,7 @@ export type DSProject = {
  *
  * @returns A home page.
  */
-export function HomePanel() {
+export function HomePanel(): JSX.Element {
   return (
     <Box>
       <Heading>Links</Heading>

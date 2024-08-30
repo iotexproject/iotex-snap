@@ -1,3 +1,4 @@
+import type { ManageStateResult } from '@metamask/snaps-sdk';
 import { Box, Dropdown, Text, Spinner } from '@metamask/snaps-sdk/jsx';
 
 import { ConnectedAccountsList } from '../components/ConnectedAccount';
@@ -29,7 +30,7 @@ export async function createInterface(): Promise<string> {
  *
  * @param id - The Snap interface ID.
  */
-export async function listDepinProjects(id: string) {
+export async function listDepinProjects(id: string): Promise<void> {
   await snap.request({
     method: 'snap_updateInterface',
     params: {
@@ -67,7 +68,7 @@ export async function listDepinProjects(id: string) {
  *
  * @param id - The Snap interface ID.
  */
-export async function clearDepinProjects(id: string) {
+export async function clearDepinProjects(id: string): Promise<void> {
   await snap.request({
     method: 'snap_manageState',
     params: {
@@ -95,7 +96,10 @@ export async function clearDepinProjects(id: string) {
  * @param id - The Snap interface ID.
  * @param project - An object with DepinScan project info.
  */
-export async function showProjectInfo(id: string, project: DSProject) {
+export async function showProjectInfo(
+  id: string,
+  project: DSProject,
+): Promise<void> {
   await snap.request({
     method: 'snap_updateInterface',
     params: {
@@ -110,7 +114,7 @@ export async function showProjectInfo(id: string, project: DSProject) {
  *
  * @param id - The Snap interface ID to update.
  */
-export async function showConvertForm(id: string) {
+export async function showConvertForm(id: string): Promise<void> {
   await snap.request({
     method: 'snap_updateInterface',
     params: {
@@ -125,7 +129,7 @@ export async function showConvertForm(id: string) {
  *
  * @param id - The Snap interface ID to update.
  */
-export async function showMyConvertedAddresses(id: string) {
+export async function showMyConvertedAddresses(id: string): Promise<void> {
   const addresses = await ethereum.request({
     method: 'eth_requestAccounts',
   });
@@ -146,7 +150,7 @@ export async function showMyConvertedAddresses(id: string) {
  *
  * @param id - The Snap interface ID to update.
  */
-export async function updateInterfaceToHomePage(id: string) {
+export async function updateInterfaceToHomePage(id: string): Promise<void> {
   await snap.request({
     method: 'snap_updateInterface',
     params: {
@@ -167,7 +171,7 @@ export async function showAddrConvertResult(
   id: string,
   originalAddr: string,
   convertedAddr: string,
-) {
+): Promise<void> {
   await snap.request({
     method: 'snap_updateInterface',
     params: {
@@ -207,7 +211,7 @@ export async function fetchDSProjects(): Promise<DSProject[]> {
  *
  * @param id - The Snap interface ID to update.
  */
-export async function showLoadingState(id: string) {
+export async function showLoadingState(id: string): Promise<void> {
   await snap.request({
     method: 'snap_updateInterface',
     params: {
@@ -227,7 +231,10 @@ export async function showLoadingState(id: string) {
  * @param id - The Snap interface ID to update.
  * @param errorMsg - The message to show.
  */
-export async function showErrorPage(id: string, errorMsg: string) {
+export async function showErrorPage(
+  id: string,
+  errorMsg: string,
+): Promise<void> {
   await snap.request({
     method: 'snap_updateInterface',
     params: {
@@ -247,7 +254,7 @@ export async function showErrorPage(id: string, errorMsg: string) {
  * @param addresses - The list of addresses to convert.
  * @returns The list with converted addresses.
  */
-function buildAddressesDialog(addresses: string[]) {
+function buildAddressesDialog(addresses: string[]): JSX.Element {
   const converted: { [key: string]: string } = {};
   addresses.forEach((addr) => {
     converted[addr] = convert0xToIoAddress(addr)?.resolvedAddress ?? '';
@@ -261,7 +268,7 @@ function buildAddressesDialog(addresses: string[]) {
  *
  * @returns List of DePIN Scan projects.
  */
-async function fetchDePINProjectsFromState() {
+async function fetchDePINProjectsFromState(): Promise<ManageStateResult> {
   return snap.request({
     method: 'snap_manageState',
     params: { operation: 'get', encrypted: false },
@@ -283,7 +290,7 @@ async function fetchDePINProjectsFromAPI(): Promise<DSProject[]> {
  *
  * @param projects - List of DePIN Scan projects.
  */
-async function setDePINProjectsState(projects: DSProject[]) {
+async function setDePINProjectsState(projects: DSProject[]): Promise<void> {
   await snap.request({
     method: 'snap_manageState',
     params: {

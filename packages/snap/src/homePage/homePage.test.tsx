@@ -1,5 +1,8 @@
 import { expect } from '@jest/globals';
-import { installSnap } from '@metamask/snaps-jest';
+import {
+  installSnap,
+  type SnapResponseWithInterface,
+} from '@metamask/snaps-jest';
 
 import { ConnectedAccountsList } from '../components/ConnectedAccount';
 import {
@@ -13,7 +16,10 @@ const CONVERT_ADDRESS = 'convert-address';
 const SHOW_MY_ADDRESS = 'show-my-addresses';
 const FETCH_DS_PROJECTS = 'fetch-ds-projects';
 
-const setup = async () => {
+const setup = async (): Promise<{
+  response: SnapResponseWithInterface;
+  homeScreen: any;
+}> => {
   const { onHomePage } = await installSnap();
 
   const response = await onHomePage();
