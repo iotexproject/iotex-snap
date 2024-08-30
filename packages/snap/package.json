@@ -6,6 +6,9 @@
     "type": "git",
     "url": "https://github.com/machinefi/iotex-snap.git"
   },
+  "bugs": {
+    "url": "https://github.com/machinefi/iotex-snap/issues"
+  },
   "license": "(MIT-0 OR Apache-2.0)",
   "main": "./dist/bundle.js",
   "files": [

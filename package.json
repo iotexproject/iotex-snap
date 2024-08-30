@@ -3,13 +3,13 @@
   "version": "0.2.0",
   "private": true,
   "description": "A snap that understands io addresses, supports INS domains and is friedly with DePIN assets",
-  "homepage": "https://github.com/MetaMask/template-snap-monorepo#readme",
+  "homepage": "https://github.com/machinefi/iotex-snap",
   "bugs": {
-    "url": "https://github.com/MetaMask/template-snap-monorepo/issues"
+    "url": "https://github.com/machinefi/iotex-snap/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MetaMask/template-snap-monorepo.git"
+    "url": "git+https://github.com/machinefi/iotex-snap.git"
   },
   "license": "(MIT-0 OR Apache-2.0)",
   "author": "",
