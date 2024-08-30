@@ -1,5 +1,5 @@
 {
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Boost your MetaMask with IoTeX and DePIN powers! Convert io to 0x addresses, send tokens via INS domains, and stay updated on DePIN projects—all in one snap. Smooth, easy, and community-driven.",
   "proposedName": "IoTeX",
   "repository": {
@@ -7,7 +7,7 @@
     "url": "https://github.com/machinefi/iotex-snap.git"
   },
   "source": {
-    "shasum": "Ow40sas0xcvRRjqYja1qGG3oSTybO3Ji67lgiyx9Maw=",
+    "shasum": "s6+CJYQgewOT0mH5uk/KDt1EF4+nYnmOwhD9EKyAlcM=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
