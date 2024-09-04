@@ -42,6 +42,11 @@ The IoTeX Snap integrates seamlessly into MetaMask, allowing users to send token
 - For `io` addresses, the Snap will automatically convert them to `0x` format during the transaction.
 - INS domains will be resolved directly, allowing you to send tokens without needing to know the actual address behind the domain.
 
+<p align="center">
+  <img width="411" alt="Screenshot 2024-09-05 at 12 56 25 AM" src="https://github.com/user-attachments/assets/0e2438aa-79ae-40ab-b59e-02f30142c0f0">
+  <img width="411" alt="Screenshot 2024-09-05 at 12 56 41 AM" src="https://github.com/user-attachments/assets/e525f43f-1415-4bb1-b9fc-a7df52f3c75d">
+</p>
+
 #### Converting Addresses Between `io` and `0x` Formats
 
 - The Snap provides a feature for converting addresses back and forth between the `io` format and the `0x` format.
@@ -49,6 +54,8 @@ The IoTeX Snap integrates seamlessly into MetaMask, allowing users to send token
   - Navigate to the address conversion section.
   - Input the address you want to convert.
   - The Snap will display the converted address, allowing you to copy it for future transactions.
+  
+<img width="934" alt="Screenshot 2024-09-05 at 12 59 03 AM" src="https://github.com/user-attachments/assets/82cb75e9-a4dd-4396-8a7a-87503b450a4c">
 
 #### Showing Connected Addresses
 
@@ -66,6 +73,8 @@ The IoTeX Snap integrates seamlessly into MetaMask, allowing users to send token
 
 **Note**: The connection of addresses will only happen the first time you click on the button. On subsequent clicks, the Snap will simply show you the list of connected addresses without asking for any further connections.
 
+<img width="934" alt="Screenshot 2024-09-05 at 12 58 09 AM" src="https://github.com/user-attachments/assets/adc73cd1-0ddf-4634-a2ec-f6b35fbd89a0">
+
 #### Accessing DePIN Project Information
 
 - The IoTeX Snap allows you to view detailed information about DePIN projects right inside MetaMask Flask.
@@ -82,6 +91,8 @@ The IoTeX Snap integrates seamlessly into MetaMask, allowing users to send token
     - Average device cost
     - Estimated daily earnings
   - You will also get a link to the project’s full page on DePINScan for more details.
+
+<img width="960" alt="IoTeX_2024-09-04_2" src="https://github.com/user-attachments/assets/e893fbf4-9d3b-4a1e-af70-b7fbaff13e64">
 
 ---
 
