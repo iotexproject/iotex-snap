@@ -4,10 +4,10 @@
   "proposedName": "IoTeX",
   "repository": {
     "type": "git",
-    "url": "https://github.com/machinefi/iotex-snap.git"
+    "url": "https://github.com/iotexproject/iotex-snap.git"
   },
   "source": {
-    "shasum": "s6+CJYQgewOT0mH5uk/KDt1EF4+nYnmOwhD9EKyAlcM=",
+    "shasum": "j4GKQQ5mDhiMEaDRMiWnuloogTKsAF24PnqBZIGAd3I=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
