@@ -1,5 +1,35 @@
 # iotex-snap
 
+## Table of Contents
+
+- [IoTeX Snap](#iotex-snap)
+  - [IoTeX MetaMask Snap – Knowledge Base](#iotex-metamask-snap--knowledge-base)
+    - [Introduction to the IoTeX Snap](#introduction-to-the-iotex-snap)
+    - [Installation Guide](#installation-guide)
+      - [How to Install the IoTeX Snap in MetaMask](#how-to-install-the-iotex-snap-in-metamask)
+    - [Detailed Feature Explanations](#detailed-feature-explanations)
+      - [Sending Tokens Using `io` Addresses or INS Domains](#sending-tokens-using-io-addresses-or-ins-domains)
+      - [Converting Addresses Between `io` and `0x` Formats](#converting-addresses-between-io-and-0x-formats)
+      - [Showing Connected Addresses](#showing-connected-addresses)
+      - [Accessing DePIN Project Information](#accessing-depin-project-information)
+    - [Important Note: MetaMask Flask Requirement](#important-note-metamask-flask-requirement)
+    - [Troubleshooting](#troubleshooting)
+      - [Issue: INS Domain Not Resolving](#issue-ins-domain-not-resolving)
+      - [Issue: DePIN Project Information Not Loading](#issue-depin-project-information-not-loading)
+      - [Issue: Address Conversion Fails](#issue-address-conversion-fails)
+    - [Contact & Support](#contact--support)
+  - [IoTeX MetaMask Snap – FAQ](#iotex-metamask-snap--faq)
+    - [1. What is the IoTeX Snap, and what does it do?](#1-what-is-the-iotex-snap-and-what-does-it-do)
+    - [2. Can the Snap automatically convert addresses when sending tokens?](#2-can-the-snap-automatically-convert-addresses-when-sending-tokens)
+    - [3. How does sending tokens to an INS domain work?](#3-how-does-sending-tokens-to-an-ins-domain-work)
+    - [4. What types of tokens can I send using the IoTeX Snap?](#4-what-types-of-tokens-can-i-send-using-the-iotex-snap)
+    - [5. How do I access DePIN project information using the Snap?](#5-how-do-i-access-depin-project-information-using-the-snap)
+    - [6. Are there plans to expand DePIN project interaction in the future?](#6-are-there-plans-to-expand-depin-project-interaction-in-the-future)
+    - [7. What permissions does the IoTeX Snap request?](#7-what-permissions-does-the-iotex-snap-request)
+    - [8. Will the Snap access my private keys or perform actions without my permission?](#8-will-the-snap-access-my-private-keys-or-perform-actions-without-my-permission)
+    - [9. How do I get started with the IoTeX Snap?](#9-how-do-i-get-started-with-the-iotex-snap)
+    - [10. Can I refresh DePIN project data?](#10-can-i-refresh-depin-project-data)
+
 ## IoTeX MetaMask Snap – Knowledge Base
 
 ---
