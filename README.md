@@ -4,6 +4,8 @@ Boost your MetaMask with IoTeX and DePIN powers! Convert io to 0x addresses, sen
 
 ## Getting Started
 
+[IoTeX Snap Knowlege Base and FAQ](packages/snap/README.md)
+
 Clone the template-snap repository [using this template](https://github.com/MetaMask/template-snap-monorepo/generate)
 and set up the development environment:
 
