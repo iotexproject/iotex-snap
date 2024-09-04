@@ -84,7 +84,7 @@ The IoTeX Snap integrates seamlessly into MetaMask, allowing users to send token
   - Navigate to the address conversion section.
   - Input the address you want to convert.
   - The Snap will display the converted address, allowing you to copy it for future transactions.
-  
+
 <img width="934" alt="Screenshot 2024-09-05 at 12 59 03 AM" src="https://github.com/user-attachments/assets/82cb75e9-a4dd-4396-8a7a-87503b450a4c">
 
 #### Showing Connected Addresses
@@ -159,43 +159,43 @@ If you encounter any issues or have further questions, you can reach out to our 
 
 ---
 
-### 1. What is the IoTeX Snap, and what does it do?  
+### 1. What is the IoTeX Snap, and what does it do?
 
 The IoTeX Snap allows users to send tokens to both `io` addresses and INS domains, convert addresses between `io` and `0x` formats, and fetch information about DePIN projects—all directly within MetaMask.
 
 ---
 
-### 2. Can the Snap automatically convert addresses when sending tokens?  
+### 2. Can the Snap automatically convert addresses when sending tokens?
 
 Yes, the Snap will automatically convert an `io` address to a `0x` format during a transaction. This makes it seamless to send tokens without needing to manually convert the address beforehand.
 
 ---
 
-### 3. How does sending tokens to an INS domain work?  
+### 3. How does sending tokens to an INS domain work?
 
 You can enter an INS domain instead of an `io` address when sending tokens. The Snap will resolve the domain and handle the transaction. **Note:** INS domain resolution only works on the IoTeX mainnet.
 
 ---
 
-### 4. What types of tokens can I send using the IoTeX Snap?  
+### 4. What types of tokens can I send using the IoTeX Snap?
 
 You can send any tokens that are on the IoTeX blockchain, including both native tokens like IOTX and any other IoTeX-based assets such as XRC20 tokens. As long as the token exists on the IoTeX network, the Snap will support it for transactions.
 
 ---
 
-### 5. How do I access DePIN project information using the Snap?  
+### 5. How do I access DePIN project information using the Snap?
 
 You can list and view DePIN projects directly in MetaMask. The Snap fetches detailed project information from DePINScan, including the project description, token, total devices, days to break even, market cap, token price, average device cost, and estimated daily earnings. You'll also get a link to the full project page on DePINScan. However, this feature is currently informational only, with no direct interaction supported yet.
 
 ---
 
-### 6. Are there plans to expand DePIN project interaction in the future?  
+### 6. Are there plans to expand DePIN project interaction in the future?
 
 Yes, future plans may include the ability to interact with DePIN projects directly through the Snap, such as adding DePIN tokens for easier swaps. For now, the feature remains informational.
 
 ---
 
-### 7. What permissions does the IoTeX Snap request?  
+### 7. What permissions does the IoTeX Snap request?
 
 The IoTeX Snap requires the following permissions to function properly:
 
@@ -208,18 +208,18 @@ The IoTeX Snap requires the following permissions to function properly:
 
 ---
 
-### 8. Will the Snap access my private keys or perform actions without my permission?  
+### 8. Will the Snap access my private keys or perform actions without my permission?
 
 No, the Snap won’t access your private keys or take any actions without your explicit approval. You will have control over every action the Snap performs.
 
 ---
 
-### 9. How do I get started with the IoTeX Snap?  
+### 9. How do I get started with the IoTeX Snap?
 
 You can install the IoTeX Snap through MetaMask’s Snap list, or use the **Connect Snap** button on supported websites like IoPay Wallet. From there, you can grant permissions and start using the Snap.
 
 ---
 
-### 10. Can I refresh DePIN project data?  
+### 10. Can I refresh DePIN project data?
 
 Yes, you can refresh the cached DePIN project data by removing the current Snap state and fetching the latest information again. "Clear DePIN Scan data" button is accessible in the snap menu.
