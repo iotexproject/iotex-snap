@@ -12,7 +12,9 @@ export const getDomainByAddrQuery = `
   query getDomain($address: String!) {
     account(id: $address) {
       wrappedDomains {
-        name
+        domain {
+          name
+        }
       }
     }
   }

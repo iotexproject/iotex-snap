@@ -4,7 +4,9 @@ export type DomainData = {
 
 export type AccountData = {
   account: {
-    wrappedDomains: Domain[];
+    wrappedDomains: {
+      domain: Domain;
+    }[];
   };
 };
 

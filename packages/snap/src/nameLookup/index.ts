@@ -3,7 +3,11 @@ import type {
   OnNameLookupHandler,
 } from '@metamask/snaps-sdk';
 
-import { getDomainOwnerQuery, INS_SUBGRAPH } from './queryINS';
+import {
+  getDomainByAddrQuery,
+  getDomainOwnerQuery,
+  INS_SUBGRAPH,
+} from './queryINS';
 import type { AccountData, DomainData } from './types';
 import { convertIoToOxAddress } from '../utils/convert';
 
@@ -11,7 +15,7 @@ const IOTEX_MAINNET_CHAIN_ID = 'eip155:4689';
 const IOTEX_TESTNET_CHAIN_ID = 'eip155:4690';
 
 export const onNameLookup: OnNameLookupHandler = async (request) => {
-  const { chainId, domain } = request;
+  const { domain, chainId } = request;
 
   if (
     chainId !== IOTEX_MAINNET_CHAIN_ID &&
@@ -71,14 +75,14 @@ export async function getInsDomainOwner(
  */
 export async function getAccountDomains(
   address: string,
-): Promise<string | null | undefined> {
+): Promise<string | undefined> {
   const accountResult = await sendAccountRequest(address);
 
   if (!accountResult || accountResult.account?.wrappedDomains?.length < 1) {
-    return null;
+    return undefined;
   }
 
-  const resolvedDomain = accountResult.account.wrappedDomains[0]?.name;
+  const resolvedDomain = accountResult.account.wrappedDomains[0]?.domain?.name;
 
   return resolvedDomain;
 }
@@ -119,12 +123,13 @@ async function sendAccountRequest(address: string): Promise<AccountData> {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      query: getDomainOwnerQuery,
+      query: getDomainByAddrQuery,
       variables: {
         address,
       },
     }),
   });
   const { data } = await res.json();
+
   return data;
 }
