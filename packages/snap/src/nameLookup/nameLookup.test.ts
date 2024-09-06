@@ -127,7 +127,9 @@ describe('onNameLookup', () => {
             account: {
               wrappedDomains: [
                 {
-                  name: DOMAIN_MOCK,
+                  domain: {
+                    name: DOMAIN_MOCK,
+                  },
                 },
               ],
             },
@@ -150,7 +152,7 @@ describe('onNameLookup', () => {
         }),
       } as any);
 
-      expect(await getAccountDomains(IO_ADDRESS_MOCK)).toBeNull();
+      expect(await getAccountDomains(IO_ADDRESS_MOCK)).toBeUndefined();
     });
     it('returns null if invalid io address', async () => {
       const request = {
