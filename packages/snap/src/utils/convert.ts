@@ -22,7 +22,7 @@ export function convertIoToOxAddress(
     return {
       resolvedAddresses: [
         {
-          protocol: 'ins',
+          protocol: 'IoTeX Name Service',
           domainName: address,
           resolvedAddress: `0x${resolvedAddress}`,
         },

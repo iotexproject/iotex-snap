@@ -58,7 +58,7 @@ export async function getInsDomainOwner(
     ? {
         resolvedAddresses: [
           {
-            protocol: 'ins',
+            protocol: 'IoTeX Name Service',
             domainName: domain,
             resolvedAddress,
           },

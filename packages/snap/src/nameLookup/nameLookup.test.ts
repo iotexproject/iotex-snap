@@ -43,7 +43,7 @@ describe('onNameLookup', () => {
       expect(await onNameLookup(request)).toStrictEqual({
         resolvedAddresses: [
           {
-            protocol: 'ins',
+            protocol: 'IoTeX Name Service',
             domainName: DOMAIN_MOCK,
             resolvedAddress: ADDRESS_MOCK,
           },
@@ -113,7 +113,7 @@ describe('onNameLookup', () => {
       expect(await onNameLookup(request)).toStrictEqual({
         resolvedAddresses: [
           {
-            protocol: 'ins',
+            protocol: 'IoTeX Name Service',
             domainName: IO_ADDRESS_MOCK,
             resolvedAddress: OX_ADDRESS_MOCK,
           },
