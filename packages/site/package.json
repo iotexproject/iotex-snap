@@ -26,7 +26,7 @@
     ]
   },
   "dependencies": {
-    "@metamask/providers": "^17.1.2",
+    "@metamask/providers": "^18.1.0",
     "babel-plugin-styled-components": "^2.1.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
